@@ -3,23 +3,20 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
         <link rel="stylesheet" href="styles/style.css">
-        <title> Breakout?! </title>
+        <title> Baba Is You </title>
     </head>
     <body>
-        <table style="width:100%">
-            <tr>
-                <thead>
-                    <th id="Header" colspan="3">Breakout?!</th>
-                </thead>
-            </tr>
-            <tr>
-                <td id="GameArea">
-                    <canvas id="canvas" width="1000" length="750"></canvas>
-                </td>
-            </tr>
-        </table>
+        <div id="layoutGrid">
+            <div>
+                <h1 id="Header">Baba Is You</h1>
+            </div>
+            <div id="GameArea">
+                <canvas id="canvas" width="720" height="720"></canvas>
+            </div>
+        </div>
 
-        <script src="scripts/game.js"></script>
+        <script type="module" src="scripts/game.mjs"></script>
     </body>
 </html>

@@ -1,3 +1,5 @@
+import { Mode } from "./globals.mjs"
+
 let menus = []
 
 export const MainMenu = buildMenu(center, new Set(['new game', 'high scores', 'credits']), 'gui-main-menu')
@@ -7,7 +9,7 @@ export const PauseMenu = buildMenu(center, new Set(['resume', 'quit']), 'gui-pau
 
 export function hideMenus() {
     for (menu in menus) {
-        menu.hide();
+        menu.setVisibility(false);
     }
 }
 

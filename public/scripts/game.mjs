@@ -1,44 +1,51 @@
 import { MainMenu, HighScoresMenu, CreditsMenu, PauseMenu, hideMenus } from "./state/buildMenu";
-import { States } from "./utilities/enums";
+import { Modes } from "./utilities/enums";
+import { Mode } from './state/globals.mjs'
 
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
 let canvasHeight = window.innerHeight - 175;
-let canvasWidth = canvasHeight*(4/3);
+let canvasWidth = canvasHeight*(1 + 7/9);
 
 canvas.height = canvasHeight;
 canvas.width = canvasWidth;
 canvas.style.height = canvasHeight;
 canvas.style.width = canvasWidth;
 
-switchState(States.MAIN)
+Mode.set(Modes.MAIN)
+
+Mode.subscribe(mode => {
+  if (mode === Modes.NEWGAME) {
+    initGame()
+  }
+})
 
 function switchState (s) {
     state = s
     hideMenus()
 
     switch (state) {
-        case States.MAIN:
+        case Modes.MAIN:
           MainMenu.show();
           break;
-        case States.SCORES:
+        case Modes.SCORES:
           HighScoresMenu.show();
           break;
-        case States.CREDITS:
+        case Modes.CREDITS:
           CreditsMenu.show();
           break;
-        case States.PAUSE:
+        case Modes.PAUSE:
           system.pause();
           PauseMenu.show();
           break;
-        case States.NEWGAME:
+        case Modes.NEWGAME:
           initGame();
-          switchState(States.COUNTDOWN);
+          switchState(Modes.COUNTDOWN);
           break;
-        case States.COUNTDOWN:
-          initCountdown().then(() => switchState(States.GAME));
+        case Modes.COUNTDOWN:
+          initCountdown().then(() => switchState(Modes.GAME));
           break;
-        case States.GAME:
+        case Modes.GAME:
           system.unpause();
           gameLoop(performance.now());
           break;

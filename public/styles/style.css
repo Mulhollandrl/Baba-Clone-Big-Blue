@@ -1,21 +1,7 @@
-#Footer {
-    background-color: #352510;
-    font-size: medium;
-    font-weight: bold;
-}
-
 #Header {
     background-color: #352510;
     font-size: xx-large;
     font-weight: bold;
-}
-
-#HorizontalDiv {
-    display: flex;
-}
-
-.CenteredDiv {
-    text-align: center;
 }
 
 .Scores {
@@ -27,14 +13,21 @@ body {
     background-color: #352510;
     font-family: 'Courier New', Courier, monospace;
     color: aliceblue;
+    height: 90vh;
 }
 
-canvas {
+#canvas {
     border: 3px solid #000000;
     /* width: 1000px;
     height: 750px; */
     image-rendering: pixelated; 
-    image-rendering: crisp-edges; 
+    image-rendering: crisp-edges;
+    /* width: 50vw; */
+}
+
+#layoutGrid {
+    display: grid;
+    grid-template-rows: 80px 1fr;
 }
 
 form {
@@ -45,12 +38,11 @@ html {
     background-color: black;
 }
 
-table, td {
-    border: 2px ridge aliceblue;
+#layoutGrid, #layoutGrid > * {
+    border: 1px ridge aliceblue;
     text-align: center;
 }
 
-td {
+#layoutGrid > * {
     background-color: rgb(106, 106, 95);
-    width: 32%;
 }

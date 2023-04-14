@@ -1,4 +1,4 @@
-export const States = {
+export const Modes = {
     MAIN: 'main',
     SCORES: 'scores',
     CREDITS: 'credits',
