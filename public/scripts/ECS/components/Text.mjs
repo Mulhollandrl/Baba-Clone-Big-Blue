@@ -15,6 +15,6 @@ export function Text(spec) {
     // Make it so that you can retrieve all of them
     return {
         get name() { return spec.name },
-        get textType() { return spec.textType }
+        textType : spec.textType
     }
 }

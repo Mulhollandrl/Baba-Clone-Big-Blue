@@ -13,6 +13,6 @@ export function Noun(spec) {
     // Make it so that you can retrieve all of them
     return {
         get name() { return spec.name },
-        get nounType() { return spec.nounType }
+        nounType : spec.nounType
     }
 }

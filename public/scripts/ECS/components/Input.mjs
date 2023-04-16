@@ -11,6 +11,6 @@ export function Input(spec) {
     // Make it so that you can retrieve all of them
     return {
         get name() { return spec.name },
-        get inputReady() { return spec.inputReady }
+        inputReady : spec.inputReady
     }
 }

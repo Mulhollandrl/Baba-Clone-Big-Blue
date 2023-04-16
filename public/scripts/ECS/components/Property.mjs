@@ -16,11 +16,11 @@ export function Property(spec) {
     // Make it so that you can retrieve all of them
     return {
         get name() { return spec.name },
-        get isStop() { return spec.isStop },
-        get isPush() { return spec.isPush },
-        get isYou() { return spec.isYou },
-        get isWin() { return spec.isWin },
-        get isSink() { return spec.isSink },
-        get isDefeat() { return spec.isDefeat },
+        isStop : spec.isStop,
+        isPush : spec.isPush,
+        isYou : spec.isYou,
+        isWin : spec.isWin,
+        isSink : spec.isSink,
+        isDefeat : spec.isDefeat
     }
 }

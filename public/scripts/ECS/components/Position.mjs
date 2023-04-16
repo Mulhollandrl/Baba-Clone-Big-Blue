@@ -11,7 +11,7 @@ export function Position(spec) {
     // Make it so that you can retrieve all of them
     return {
         get name() { return spec.name },
-        get x() { return spec.x },
-        get y() { return spec.y }
+        x : spec.x,
+        y : spec.y
     }
 }
