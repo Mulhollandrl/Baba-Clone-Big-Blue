@@ -1,4 +1,4 @@
-export class Persistent {
+export default class Persistent {
   name
   data
   

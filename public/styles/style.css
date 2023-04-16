@@ -28,6 +28,7 @@ body {
 #layoutGrid {
     display: grid;
     grid-template-rows: 80px 1fr;
+    height: 100%;
 }
 
 form {
@@ -45,4 +46,23 @@ html {
 
 #layoutGrid > * {
     background-color: rgb(106, 106, 95);
+}
+
+.layered-children {
+    position: relative;
+    width: min-content;
+    margin: auto;
+}
+
+.layered-children > *:not(.base) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+#GameArea {
+    height: 100%;
 }

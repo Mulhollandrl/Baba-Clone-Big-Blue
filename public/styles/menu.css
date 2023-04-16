@@ -1,0 +1,18 @@
+.menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.menu > .header {
+  flex-basis: 80px;
+}
+
+.menu > .middle {
+  flex-grow: 1;
+}
+
+.menu > .footer {
+  flex-basis: 80px;
+  flex-shrink: 1;
+}

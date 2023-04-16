@@ -6,7 +6,7 @@
  * When the value is changed, each subscriber's callback gets called
  * </p>
  */
-export class Observable {
+export default class Observable {
   id = 0
   subscribers
   data

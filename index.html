@@ -13,10 +13,28 @@
                 <h1 id="Header">Baba Is You</h1>
             </div>
             <div id="GameArea">
-                <canvas id="canvas" width="720" height="720"></canvas>
+                <div class="layered-children">
+                    <canvas id="canvas" class="base" width="720" height="720"></canvas>
+                    <div id="html-overlay">
+                        
+                    </div>
+                </div>
             </div>
         </div>
 
+        <template id="menu-template">
+            <div class="menu">
+                <div class="header" id="menu-header"></div>
+                <div class="middle" id="menu-middle"></div>
+                <div class="footer" id="menu-footer"></div>    
+            </div>
+        </template>
+        <template id="grid-template">
+            <div class="level-select"></div>
+        </template>
+        <template id="button-template">
+            <button class="button"></div>
+        </template>
         <script type="module" src="scripts/game.mjs"></script>
     </body>
 </html>
