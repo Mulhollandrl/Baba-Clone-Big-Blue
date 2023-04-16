@@ -1,23 +1,18 @@
-ECS.components.Noun = function(spec) {
+import { nounTypesEnum } from "../../state/enums.mjs"
+
+// A Noun is an object that you can see and push around i.e. A Rock
+export function Noun(spec) {
+    // Define a default Noun
     if (spec == undefined) {
         spec = {
             name: 'noun',
-            isStop: false,
-            isPush: false,
-            isYou: false,
-            isWin: false,
-            isSink: false,
-            isDefeat: false
+            nounType: nounTypesEnum.BIGBLUE
         }
     }
 
+    // Make it so that you can retrieve all of them
     return {
         get name() { return spec.name },
-        get isStop() { return spec.isStop },
-        get isPush() { return spec.isPush },
-        get isYou() { return spec.isYou },
-        get isWin() { return spec.isWin },
-        get isSink() { return spec.isSink },
-        get isDefeat() { return spec.isDefeat },
+        nounType : spec.nounType
     }
 }
