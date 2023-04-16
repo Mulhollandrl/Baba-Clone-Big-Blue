@@ -1,13 +1,16 @@
-let menus = []
+import { Mode } from "../state/globals.mjs"
+import { MODES, PAUSE_OPTIONS } from "../state/enums.mjs"
 
-export const MainMenu = buildMenu(center, new Set(['new game', 'high scores', 'credits']), 'gui-main-menu')
-export const HighScoresMenu = buildMenu(footer, new Set(['main menu', 'delete scores']), 'gui-high-scores')
-export const CreditsMenu = buildMenu(footer, new Set(['main menu']), 'gui-credits')
-export const PauseMenu = buildMenu(center, new Set(['resume', 'quit']), 'gui-pause-menu')
+
+export const MainMenu = buildMenu(center, new Set([MODES.NEWGAME, MODES.CREDITS]), 'gui-main-menu')
+export const CreditsMenu = buildMenu(footer, new Set([MODES.MAIN]), 'gui-credits')
+export const PauseMenu = buildMenu(center, new Set([PAUSE_OPTIONS.RESUME, PAUSE_OPTIONS.QUIT]), 'gui-pause-menu')
+
+let menus = []
 
 export function hideMenus() {
     for (menu in menus) {
-        menu.hide();
+        menu.setVisibility(false);
     }
 }
 
@@ -54,5 +57,7 @@ export function buildMenu (parent, items, menuName) {
       freeze
     }
   
+    menus.push(circularRef)
+    
     return circularRef
   }

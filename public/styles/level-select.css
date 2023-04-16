@@ -1,0 +1,8 @@
+.level-select {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(2em, 1fr));
+}
+
+.level-select > * {
+  height: 2em;
+}
