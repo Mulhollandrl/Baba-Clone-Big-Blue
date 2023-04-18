@@ -1,14 +1,9 @@
-export const MODES = {
-    MAIN: 'main menu',
-    SCORES: 'high scores',
+export const modesEnum = {
+    HOME: 'main menu',
     CREDITS: 'credits',
-    PAUSE: 'pause',
-    NEWGAME: 'new game',
-    COUNTDOWN: 'countdown',
+    LEVELS: 'levels',
     GAME: 'game',
-    DELETE_SCORES: 'delete scores',
-    RESUME: 'resume',
-    QUIT: 'quit'
+    CONTROLS: 'controls'
 }
 
 export const PAUSE_OPTIONS = {

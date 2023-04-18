@@ -1,6 +1,9 @@
-import { MainMenu, CreditsMenu, PauseMenu, hideMenus } from "./GUI/buildMenu.mjs";
-import { MODES } from "./state/enums.mjs";
-import { Mode } from './state/globals.mjs'
+import { controlsPage } from "./GUI/views/controls.mjs";
+import { creditsPage } from "./GUI/views/credits.mjs";
+import { homePage } from "./GUI/views/home.mjs";
+import { levelsPage } from "./GUI/views/levels.mjs";
+import { modesEnum } from "./state/enums.mjs";
+// import { Mode } from './state/globals.mjs'
 
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
@@ -12,62 +15,108 @@ canvas.width = canvasWidth;
 canvas.style.height = canvasHeight;
 canvas.style.width = canvasWidth;
 
-Mode.set(MODES.MAIN)
 
-Mode.subscribe(mode => {
-  if (mode === MODES.NEWGAME) {
-    initGame()
-  }
-})
+let HomeScreen = homePage(canvasWidth, canvasHeight, context);
+let LevelsScreen = levelsPage(canvasWidth, canvasHeight, context);
+let ControlsScreen = controlsPage(canvasWidth, canvasHeight, context);
+let CreditsScreen = creditsPage(canvasWidth, canvasHeight, context);
+// let GameScreen = gamePage(canvasWidth, canvasHeight, context);
 
-function switchState (s) {
-    state = s
-    hideMenus()
-
-    switch (state) {
-        case MODES.MAIN:
-          MainMenu.show();
-          break;
-        case MODES.SCORES:
-          HighScoresMenu.show();
-          break;
-        case MODES.CREDITS:
-          CreditsMenu.show();
-          break;
-        case MODES.PAUSE:
-          system.pause();
-          PauseMenu.show();
-          break;
-        case MODES.NEWGAME:
-          initGame();
-          switchState(MODES.COUNTDOWN);
-          break;
-        case MODES.COUNTDOWN:
-          initCountdown().then(() => switchState(MODES.GAME));
-          break;
-        case MODES.GAME:
-          system.unpause();
-          gameLoop(performance.now());
-          break;
-        default:
-          throw new Error(`Invalid state: ${state}`);
-      }
+export function restartGame() {
+  // let GameScreen = gamePage(canvasWidth, canvasHeight, context);
 }
 
-MainMenu
-  .onButton('new game', () => switchState('new game'))
-  .onButton('high scores', () => switchState('scores'))
-  .onButton('credits', () => switchState('credits'))
-  .freeze()
+let state = modesEnum.HOME;
 
-HighScoresMenu
-  .onButton('main menu', () => switchState('main'))
-  // .onButton('delete scores', () => deleteScores())
+let input = (function() {
+  function Keyboard() {
+      let that = {
+          keys : {}
+      };
+      function keyPress(e) {
+          that.keys[e.key] = e.timeStamp;
+      }
+      function keyRelease(e) {
+          delete that.keys[e.key];
+      }
+      window.addEventListener('keydown', keyPress);
+      window.addEventListener('keyup', keyRelease);
+      
+      return that;
+  }
+  
+  return {
+      Keyboard : Keyboard
+  };
+}()).Keyboard();
 
-CreditsMenu
-  .onButton('main menu', () => switchState('main'))
-  .freeze()
+function processInput() {
+  switch (state) {
+      case modesEnum.HOME:
+        state = HomeScreen.processInput(input.keys);
+        break;
+      case modesEnum.LEVELS:
+        state = LevelsScreen.processInput(input.keys);
+        break;
+      case modesEnum.CONTROLS:
+        state = ControlsScreen.processInput(input.keys);
+        break;
+      case modesEnum.CREDITS:
+        state = CreditsScreen.processInput(input.keys);
+        break;
+      case modesEnum.GAME:
+        break;
+  }
+}
 
-PauseMenu
-  .onButton('resume', () => switchState('countdown'))
-  .onButton('quit', () => switchState('main'))
+function update(timeStamp) {
+  switch (state) {
+    case modesEnum.HOME:
+      HomeScreen.update();
+      break;
+    case modesEnum.LEVELS:
+      break;
+    case modesEnum.CONTROLS:
+      break;
+    case modesEnum.CREDITS:
+      break;
+    case modesEnum.GAME:
+      break;
+  }
+}
+
+function render() {
+  context.beginPath()
+  context.rect(0, 0, canvasWidth, canvasHeight)
+  context.fillStyle = "#595959"
+  context.fill();
+  context.closePath();
+  context.fillStyle = "white"
+
+  switch (state) {
+    case modesEnum.HOME:
+      HomeScreen.render();
+      break;
+    case modesEnum.LEVELS:
+      LevelsScreen.render();
+      break;
+    case modesEnum.CONTROLS:
+      ControlsScreen.render();
+      break;
+    case modesEnum.CREDITS:
+      CreditsScreen.render();
+      break;
+    case modesEnum.GAME:
+      break;
+  }
+}
+
+function gameLoop(timeStamp) {
+  processInput();
+  update(timeStamp);
+  render();
+
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();

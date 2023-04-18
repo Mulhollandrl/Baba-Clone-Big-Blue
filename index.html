@@ -6,35 +6,38 @@
         <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
         <link rel="stylesheet" href="styles/style.css">
         <title> Baba Is You </title>
+        <script type="module" src="scripts/game.mjs"></script>
+    </body>
+</html>
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+        <link rel="stylesheet" href="styles/style.css">
+        <title> Big Blue Is You! </title>
     </head>
     <body>
-        <div id="layoutGrid">
-            <div>
-                <h1 id="Header">Baba Is You</h1>
-            </div>
-            <div id="GameArea">
-                <div class="layered-children">
-                    <canvas id="canvas" class="base" width="720" height="720"></canvas>
-                    <div id="html-overlay">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+        <table style="width:100%">
+            <tr>
+                <thead>
+                    <th id="Header" colspan="3">Big Blue Is You!</th>
+                </thead>
+            </tr>
+            <tr>
+                <td id="GameArea">
+                    <canvas id="canvas" width="1000" length="750"></canvas>
+                </td>
+            </tr>
+            <tr>
+                <tfoot>
+                    <th id="Footer" colspan="3">Created By Ethan Christensen AND Richard Mulholland For CS5410</th>
+                </tfoot>
+            </tr>
+        </table>
 
-        <template id="menu-template">
-            <div class="menu">
-                <div class="header" id="menu-header"></div>
-                <div class="middle" id="menu-middle"></div>
-                <div class="footer" id="menu-footer"></div>    
-            </div>
-        </template>
-        <template id="grid-template">
-            <div class="level-select"></div>
-        </template>
-        <template id="button-template">
-            <button class="button"></div>
-        </template>
         <script type="module" src="scripts/game.mjs"></script>
     </body>
 </html>
