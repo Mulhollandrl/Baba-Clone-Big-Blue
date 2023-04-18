@@ -2,12 +2,14 @@ export function Sprite(spec) {
     // Define a default Sprite
     if (spec == undefined) {
         spec = {
-            name: 'sprite',
             spriteSheet: 'assets/babaSprites',
             // spriteWidth is the width of your sprites on your spriteSheet
             spriteWidth: 26
         }
     }
+
+    // The name of the component is always the same, no matter if it is undefined specs
+    spec.name = 'sprite';
 
     // Make it so that you can retrieve all of them
     return {

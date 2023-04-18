@@ -3,7 +3,6 @@ export function Property(spec) {
     // Define a default Property
     if (spec == undefined) {
         spec = {
-            name: 'property',
             isStop: false,
             isPush: false,
             isYou: false,
@@ -12,6 +11,9 @@ export function Property(spec) {
             isDefeat: false
         }
     }
+
+    // The name of the component is always the same, no matter if it is undefined specs
+    spec.name = 'property';
 
     // Make it so that you can retrieve all of them
     return {
