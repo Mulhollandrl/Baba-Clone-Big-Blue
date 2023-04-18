@@ -7,10 +7,12 @@ export function Text(spec) {
     // Define a default Text
     if (spec == undefined) {
         spec = {
-            name: 'text',
             textType: textTypesEnum.VERB
         }
     }
+
+    // The name of the component is always the same, no matter if it is undefined specs
+    spec.name = 'text';
 
     // Make it so that you can retrieve all of them
     return {

@@ -30,3 +30,12 @@ export const nounTypesEnum = {
     LAVA: 'lava',
     WATER: 'water'
 }
+
+export const componentTypesEnum = {
+    INPUT: 'input',
+    NOUN: 'noun',
+    POSITION: 'position',
+    PROPERTY: 'property',
+    SPRITE: 'sprite',
+    TEXT: 'text'
+}

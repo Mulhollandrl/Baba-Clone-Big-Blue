@@ -5,10 +5,12 @@ export function Noun(spec) {
     // Define a default Noun
     if (spec == undefined) {
         spec = {
-            name: 'noun',
             nounType: nounTypesEnum.BIGBLUE
         }
     }
+
+    // The name of the component is always the same, no matter if it is undefined specs
+    spec.name = 'noun';
 
     // Make it so that you can retrieve all of them
     return {
