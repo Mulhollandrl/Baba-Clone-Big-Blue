@@ -1,3 +1,5 @@
+import { unhoveredColor, hoveredColor } from "../../state/consts.mjs";
+
 export function button (specs, windowWidth, context){
     let hovered = false;
 
@@ -6,9 +8,9 @@ export function button (specs, windowWidth, context){
         context.rect(100, specs.y, windowWidth - 200, specs.height)
 
         if (!hovered) {
-            context.fillStyle = "#8b0000"
+            context.fillStyle = unhoveredColor
         } else {
-            context.fillStyle = "#660000"
+            context.fillStyle = hoveredColor
         }
 
         context.fill();

@@ -66,3 +66,7 @@ html {
 #GameArea {
     height: 100%;
 }
+
+table, td {
+    text-align: center;
+}

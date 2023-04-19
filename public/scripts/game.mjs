@@ -77,6 +77,7 @@ function update(timeStamp) {
     case modesEnum.LEVELS:
       break;
     case modesEnum.CONTROLS:
+      ControlsScreen.update();
       break;
     case modesEnum.CREDITS:
       break;
