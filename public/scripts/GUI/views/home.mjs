@@ -1,6 +1,7 @@
 // This is a file to make a gui for seeing a home screen to get to everything. A "Main Menu" of sorts
 import { button } from "../utilities/buttons.mjs";
 import { modesEnum } from "../../state/enums.mjs";
+import { controlsKeys } from "../../state/globals.mjs";
 
 export function homePage (windowWidth, windowHeight, context){
     let creditsButton = button({y: 325, height: 50, text: "Credits!"}, windowWidth, context);
@@ -9,33 +10,28 @@ export function homePage (windowWidth, windowHeight, context){
     let selectedButton = 0;
 
     function processInput(keys) {
-        if (keys.hasOwnProperty('s') || keys.hasOwnProperty('k') || keys.hasOwnProperty('ArrowDown')) {
+        if (keys.hasOwnProperty(controlsKeys.down)) {
             selectedButton++;
 
             if (selectedButton > 2) {
-                selectedButton = 0
+                selectedButton = 0;
             }
 
-            delete keys['s']
-            delete keys['k']
-            delete keys['ArrowDown']
+            delete keys[controlsKeys.down];
         }
 
-        if (keys.hasOwnProperty('w') || keys.hasOwnProperty('i') || keys.hasOwnProperty('ArrowUp')) {
+        if (keys.hasOwnProperty(controlsKeys.up)) {
             selectedButton--;
 
             if (selectedButton < 0) {
                 selectedButton = 2;
             }
             
-            delete keys['w'];
-            delete keys['i'];
-            delete keys['ArrowUp'];
+            delete keys[controlsKeys.up];
         }
 
-        if (keys.hasOwnProperty('Space') || keys.hasOwnProperty('Enter')) {
-            delete keys['Space'];
-            delete keys['Enter'];
+        if (keys.hasOwnProperty(controlsKeys.select)) {
+            delete keys[controlsKeys.select];
 
             switch (selectedButton) {
                 case 0:

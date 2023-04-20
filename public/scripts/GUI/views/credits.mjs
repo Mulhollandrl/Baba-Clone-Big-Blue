@@ -1,6 +1,7 @@
 // This is a file to make a gui for seeing the credits and attributions for the game
 import { button } from "../utilities/buttons.mjs";
 import { modesEnum } from "../../state/enums.mjs";
+import { controlsKeys } from "../../state/globals.mjs";
 
 export function creditsPage (windowWidth, windowHeight, context){
     let backButton = button({y: windowHeight - (100), height: 50, text: "Back!"}, windowWidth, context);
@@ -8,10 +9,8 @@ export function creditsPage (windowWidth, windowHeight, context){
     function processInput(keys) {
         // TODO: We need to put a function here haha
 
-        if (keys.hasOwnProperty('Space') || keys.hasOwnProperty('Enter') || keys.hasOwnProperty('Escape')) {
-            delete keys['Space']
-            delete keys['Enter']
-            delete keys['Escape']
+        if (keys.hasOwnProperty(controlsKeys.select)) {
+            delete keys[controlsKeys.select]
 
             return modesEnum.HOME;
         }

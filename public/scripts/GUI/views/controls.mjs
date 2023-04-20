@@ -3,6 +3,7 @@ import { button } from "../utilities/buttons.mjs";
 import { textSelect } from "../utilities/textSelect.mjs";
 import { modesEnum } from "../../state/enums.mjs";
 import { controlsKeys } from "../../state/globals.mjs";
+import Keyboard from "../../inputs/Keyboard.js"
 
 export function controlsPage (windowWidth, windowHeight, context){
     let backButton = button({y: windowHeight - (100), height: 50, text: "Back!"}, windowWidth, context);
@@ -24,7 +25,7 @@ export function controlsPage (windowWidth, windowHeight, context){
     allControls.push(rightControl);
     allControls.push(selectControl);
     allControls.push(leaveControl);
-
+    
     function unhoverAll() {
         backButton.unhover();
         upControl.unhover();
@@ -34,9 +35,11 @@ export function controlsPage (windowWidth, windowHeight, context){
         selectControl.unhover();
         leaveControl.unhover();
     }
-
+    
     function processInput(keys) {
         // TODO: We need to put a function here haha
+
+        
         if (keys.hasOwnProperty(controlsKeys.down)) {
             if (locked !== 0) {
                 allControls[locked-1].changeVarToFollow(controlsKeys.down);
@@ -58,7 +61,7 @@ export function controlsPage (windowWidth, windowHeight, context){
                 locked = 0;
             } else {
                 selectedButton--;
-
+                
                 if (selectedButton < 0) {
                     selectedButton = 6;
                 }
@@ -66,7 +69,7 @@ export function controlsPage (windowWidth, windowHeight, context){
             
             delete keys[controlsKeys.up];
         }
-
+        
         if (keys.hasOwnProperty(controlsKeys.select)) {
             delete keys[controlsKeys.select];
             
@@ -76,15 +79,18 @@ export function controlsPage (windowWidth, windowHeight, context){
                 locked = selectedButton;
             }
         }
-
-        if (locked !== 0 && Object.keys(keys)[0] !== undefined) {
+        
+        if (locked !== 0 && locked !== 5 && Object.keys(keys)[0] !== undefined) {
+            debugger
+            console.log(Object.keys(keys)[0])
+            if (locked === 5) {
+                console.log("WRONG!!")
+            }
             allControls[locked-1].changeVarToFollow(Object.keys(keys)[0]);
             locked = 0;
 
             delete Object.keys(keys)[0];
         }
-
-        console.log(controlsKeys)
 
         return modesEnum.CONTROLS;
     }
