@@ -41,7 +41,7 @@ export function controlsPage (windowWidth, windowHeight, context){
 
         
         if (keys.hasOwnProperty(controlsKeys.down)) {
-            if (locked !== 0) {
+            if (locked !== 0 && locked !== 5) {
                 allControls[locked-1].changeVarToFollow(controlsKeys.down);
                 locked = 0;
             } else {
@@ -56,7 +56,7 @@ export function controlsPage (windowWidth, windowHeight, context){
         }
 
         if (keys.hasOwnProperty(controlsKeys.up)) {
-            if (locked !== 0) {
+            if (locked !== 0 && locked !== 5) {
                 allControls[locked-1].changeVarToFollow(controlsKeys.up);
                 locked = 0;
             } else {
