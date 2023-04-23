@@ -7,9 +7,14 @@ export function handleRendering(entityManager, grid, changeSprite) {
     const {
         getX, getY, tileSize, levelWidth, levelHeight
       } = positionGrid(grid.width, grid.height)
+
     const animateds = entityManager.queryEntities(entity =>
         entityHelpers.hasAnyComponent(entity, componentTypesEnum.SPRITE)
     );
+
+    debugger
+    context.fillStyle = "#000058"
+    context.fillRect(getX(0), getY(0), levelWidth, levelHeight)
 
     for (let i = 0; i < animateds.length; i++) {
         // Get all necessary components for drawing it correctly
@@ -23,16 +28,6 @@ export function handleRendering(entityManager, grid, changeSprite) {
 
         const image = new Image();
         image.src = spriteSheet;
-
-        // // Go to the next sprite in sheet if applicable
-        // if (changeSprite) {
-        //     sprite.spriteIndex++;
-        // }
-
-        // // Loop sprites to the beginning if needed
-        // if (spriteIndex > maxSpriteIndex) {
-        //     sprite.spriteIndex = 0;
-        // }
 
         // It draws the sprite that is necessary on the spriteSheet. The reason it has the ones is because of the borders on the sprites...
         context.drawImage(image, 
