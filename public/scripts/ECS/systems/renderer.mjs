@@ -4,7 +4,7 @@ import * as entityHelpers from "../entityHelpers.mjs"
 
 export function handleRendering(entityManager, changeSprite) {
     const animateds = entityManager.queryEntities(entity =>
-        entityHelpers.hasAllComponents(entity, componentTypesEnum.SPRITE)
+        entityHelpers.hasAnyComponent(entity, componentTypesEnum.SPRITE)
     )
 
     for (let i = 0; i < animateds.length; i++) {
@@ -17,6 +17,9 @@ export function handleRendering(entityManager, changeSprite) {
         const maxSpriteIndex = sprite.maxSpriteIndex;
         const position = animated.getComponent(componentTypesEnum.POSITION);
 
+        const image = new Image();
+        image.src = spriteSheet;
+
         // Go to the next sprite in sheet if applicable
         if (changeSprite) {
             animated.spriteIndex++;
@@ -28,6 +31,6 @@ export function handleRendering(entityManager, changeSprite) {
         }
 
         // It draws the sprite that is necessary on the spriteSheet. The reason it has the ones is because of the borders on the sprites...
-        context.drawImage(spriteSheet, (spriteIndex * spriteWidth) + 1, 1, spriteWidth, spriteWidth, position.x, position.y)
+        context.drawImage(image, (spriteIndex * spriteWidth) + 1, 1, spriteWidth, spriteWidth, position.x, position.y, spriteWidth, spriteWidth)
     }
 }

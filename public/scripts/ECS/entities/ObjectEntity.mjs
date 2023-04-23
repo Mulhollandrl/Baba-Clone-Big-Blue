@@ -3,6 +3,7 @@ import { Sprite } from "../components/Sprite.mjs";
 import { Position } from "../components/Position.mjs";
 import { Noun } from "../components/Noun.mjs";
 import { nounTypesEnum } from "../../state/enums.mjs"
+import { Property } from "../components/Property.mjs";
 
 export function createBigBlue(spec) {
     let bigBlue = Entity();
@@ -24,6 +25,17 @@ export function createWall(spec) {
     wall.addComponent(Noun({nounType: nounTypesEnum.WALL}));
 
     return wall;
+}
+
+export function createHedge(spec) {
+    let hedge = Entity();
+
+    // TODO: We need to pass in the specs for spriteSheet and spriteWidth
+    hedge.addComponent(Sprite({spriteSheet: 'assets/objects/hedgeObjectSprites.png', spriteWidth: 26, spriteIndex: 0, maxSpriteIndex: 3}));
+    hedge.addComponent(Position({x: spec.x, y: spec.y}));
+    hedge.addComponent(Property({isStop: true}))
+
+    return hedge;
 }
 
 export function createFlag(spec) {
@@ -68,4 +80,24 @@ export function createWater(spec) {
     water.addComponent(Noun({nounType: nounTypesEnum.WATER}));
 
     return water;
+}
+
+export function createFloor(spec) {
+    let floor = Entity();
+
+    // TODO: We need to pass in the specs for spriteSheet and spriteWidth
+    floor.addComponent(Sprite({spriteSheet: 'assets/objects/floorObjectSprites.png', spriteWidth: 26, spriteIndex: 0, maxSpriteIndex: 3}));
+    floor.addComponent(Position({x: spec.x, y: spec.y}));
+
+    return floor;
+}
+
+export function createGrass(spec) {
+    let grass = Entity();
+
+    // TODO: We need to pass in the specs for spriteSheet and spriteWidth
+    grass.addComponent(Sprite({spriteSheet: 'assets/objects/grassObjectSprites.png', spriteWidth: 26, spriteIndex: 0, maxSpriteIndex: 3}));
+    grass.addComponent(Position({x: spec.x, y: spec.y}));
+
+    return grass;
 }

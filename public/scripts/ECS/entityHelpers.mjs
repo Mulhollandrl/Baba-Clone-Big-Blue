@@ -9,7 +9,7 @@ import { componentTypesEnum } from "../state/enums.mjs"
  * @returns 
  */
 export function hasAllComponents (entity, components) {
-  components = components._toArray() // Force single values into arrays for ease of use
+  components = _toArray(components) // Force single values into arrays for ease of use
   const entityComponents = entity.componentList
   // for loop is equivalent to `components.every(component => entityComponents.has(component))`
   for (let i = 0; i < components.length; i++) {
@@ -28,7 +28,7 @@ export function hasAllComponents (entity, components) {
  * @returns 
  */
 export function hasAnyComponent (entity, components) {
-  components = components._toArray() // Force single values into arrays for ease of use
+  components = _toArray(components) // Force single values into arrays for ease of use
   const entityComponents = entity.componentList
   // for loop is equivalent to `components.some(component => entityComponents.has(component))`
   for (let i = 0; i < components.length; i++) {

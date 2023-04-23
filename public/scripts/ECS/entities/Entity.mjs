@@ -1,7 +1,7 @@
 let current_id = 0
 export function Entity() {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
-    const componentList = Map()
+    const componentList = new Map()
     const id = current_id++
     function addComponent(component) {
         componentList.set(component.name, component)

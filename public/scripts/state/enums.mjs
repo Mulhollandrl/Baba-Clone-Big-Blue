@@ -23,7 +23,8 @@ export const nounTypesEnum = {
     FLAG: 'flag',
     ROCK: 'rock',
     LAVA: 'lava',
-    WATER: 'water'
+    WATER: 'water',
+    TEXT: 'text'
 }
 
 export const componentTypesEnum = {

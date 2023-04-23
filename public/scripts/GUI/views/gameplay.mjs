@@ -3,16 +3,24 @@ import { button } from "../utilities/buttons.mjs";
 import { modesEnum } from "../../state/enums.mjs";
 import { controlsKeys } from "../../state/globals.mjs";
 import EntityManager from "../../ECS/EntityManager.mjs";
+import { levelMaker } from "../../ECS/levelMaker.mjs";
 
 export function gamePage (windowWidth, windowHeight, context){
-    const entityManager = new EntityManager();
+    let entityManager = null;
+    let levelMade = false;
 
     function processInput(keys) {
-
         return modesEnum.GAME;
     }
 
     function update(elapsedTime) {
+        // We need to initialize it, but only once per a gamePage...
+        if (!levelMade) {
+            entityManager = new EntityManager();
+            levelMaker(entityManager);
+            levelMade = true;
+        }
+
         entityManager.update(elapsedTime);
     }
 

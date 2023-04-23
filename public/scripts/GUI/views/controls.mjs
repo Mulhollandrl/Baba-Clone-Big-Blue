@@ -80,7 +80,6 @@ export function controlsPage (windowWidth, windowHeight, context){
         }
         
         if (locked !== 0 && locked !== 5 && Object.keys(keys)[0] !== undefined) {
-            debugger
             console.log(Object.keys(keys)[0])
             if (locked === 5) {
                 console.log("WRONG!!")

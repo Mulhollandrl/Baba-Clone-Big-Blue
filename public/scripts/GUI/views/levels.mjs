@@ -1,7 +1,7 @@
 // This is a file to make a gui for seeing and using levels of the game
 import { button } from "../utilities/buttons.mjs";
 import { modesEnum } from "../../state/enums.mjs";
-import { controlsKeys } from "../../state/globals.mjs";
+import { currentLevel, levels, controlsKeys, setCurrentLevel } from "../../state/globals.mjs";
 import { textSelect } from "../utilities/textSelect.mjs";
 
 export function levelsPage (windowWidth, windowHeight, context){
@@ -10,8 +10,12 @@ export function levelsPage (windowWidth, windowHeight, context){
     let levelStart = 125;
     let selectedButton = 0;
     
+    // Get all of the levels from the levels files
     fetch('http://localhost:3000/levels').then(response => response.json()).then(data => {
-        const levels = data; 
+        for (const level of data) {
+            levels.push(level);
+        }
+
         for (const leveled in levels) {
             levelsSelects.push(textSelect({y: levelStart, height: 50, text: data[leveled].name}, windowWidth, context));
             levelStart += 50;
@@ -55,6 +59,8 @@ export function levelsPage (windowWidth, windowHeight, context){
             if (selectedButton === 0) {
                 return modesEnum.HOME;
             } else {
+                setCurrentLevel(selectedButton - 1);
+
                 return modesEnum.GAME;
             }
         }
@@ -67,7 +73,6 @@ export function levelsPage (windowWidth, windowHeight, context){
 
         switch (selectedButton) {
             case 0:
-                debugger
                 backButton.hover();
                 break;
             default:
