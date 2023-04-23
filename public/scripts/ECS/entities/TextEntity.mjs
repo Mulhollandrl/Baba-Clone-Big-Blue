@@ -10,7 +10,7 @@ export function createNoun(spec) {
     let noun = Entity();
 
     // TODO: We need to pass in the specs for spriteSheet and spriteWidth
-    noun.addComponent(Sprite({spriteSheet: spec.spriteSheet, spriteWidth: 26, spriteIndex: 0, maxSpriteIndex: 3}));
+    noun.addComponent(Sprite({spriteSheet: spec.spriteSheet, spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     noun.addComponent(Position({x: spec.x, y: spec.y}));
     noun.addComponent(Noun({nounType: nounTypesEnum.TEXT}));
     noun.addComponent(Text({textType: spec.textType}));
@@ -22,7 +22,7 @@ export function createVerb(spec) {
     let verb = Entity();
 
     // TODO: We need to pass in the specs for spriteSheet and spriteWidth
-    verb.addComponent(Sprite({spriteSheet: spec.spriteSheet, spriteWidth: 26, spriteIndex: 0, maxSpriteIndex: 3}));
+    verb.addComponent(Sprite({spriteSheet: spec.spriteSheet, spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     verb.addComponent(Position({x: spec.x, y: spec.y}));
     verb.addComponent(Noun({nounType: nounTypesEnum.TEXT}));
     verb.addComponent(Text({textType: textTypesEnum.VERB}));

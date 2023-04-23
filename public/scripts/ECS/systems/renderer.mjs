@@ -31,6 +31,6 @@ export function handleRendering(entityManager, changeSprite) {
         }
 
         // It draws the sprite that is necessary on the spriteSheet. The reason it has the ones is because of the borders on the sprites...
-        context.drawImage(image, (spriteIndex * spriteWidth) + 1, 1, spriteWidth, spriteWidth, position.x, position.y, spriteWidth, spriteWidth)
+        context.drawImage(image, (spriteIndex * (spriteWidth + 1)) + 1, 1, spriteWidth, spriteWidth, position.x, position.y, spriteWidth, spriteWidth);
     }
 }

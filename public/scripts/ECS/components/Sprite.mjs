@@ -4,7 +4,7 @@ export function Sprite(spec) {
         spec = {
             spriteSheet: 'assets/babaSprites',
             // spriteWidth is the width of your sprites on your spriteSheet
-            spriteWidth: 26,
+            spriteWidth: 24,
             spriteIndex: 0,
             maxSpriteIndex: 3
         }
