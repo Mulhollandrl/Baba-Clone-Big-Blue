@@ -47,7 +47,7 @@ export default class Grid {
     this.grid[this._getIndex(x, y)].delete(entity.id)
   }
   
-  moveEntity (entity, direction) {
+  moveEntity (entity) {
     this.removeEntity(entity)
     const position = this._getPositionFromEntity(entity)
     const direction = this._getVectorFromDirection(direction)

@@ -4,6 +4,7 @@ import * as entityHelpers from "./entityHelpers.mjs"
 import { handleControl } from "./systems/control.mjs"
 import { handlePushing } from "./systems/push.mjs"
 import { handleMovement } from "./systems/movement.mjs"
+import { handleRendering } from "./systems/renderer.mjs"
 entityHelpers
 export default class EntityManager {
   constructor () {
@@ -40,5 +41,6 @@ export default class EntityManager {
     handleControl(this)
     handlePushing(this, this.grid)
     handleMovement(this, this.grid)
+    handleRendering(this, this.grid)
   }
 }

@@ -2,11 +2,12 @@ import { controlsPage } from "./GUI/views/controls.mjs";
 import { creditsPage } from "./GUI/views/credits.mjs";
 import { homePage } from "./GUI/views/home.mjs";
 import { levelsPage } from "./GUI/views/levels.mjs";
+import { gamePage } from "./GUI/views/gameplay.mjs";
 import { modesEnum } from "./state/enums.mjs";
 // import { Mode } from './state/globals.mjs'
 
 let canvas = document.getElementById("canvas");
-let context = canvas.getContext("2d");
+export let context = canvas.getContext("2d");
 let canvasHeight = window.innerHeight - 175;
 let canvasWidth = canvasHeight*(1 + 7/9);
 
@@ -20,10 +21,10 @@ let HomeScreen = homePage(canvasWidth, canvasHeight, context);
 let LevelsScreen = levelsPage(canvasWidth, canvasHeight, context);
 let ControlsScreen = controlsPage(canvasWidth, canvasHeight, context);
 let CreditsScreen = creditsPage(canvasWidth, canvasHeight, context);
-// let GameScreen = gamePage(canvasWidth, canvasHeight, context);
+let GameScreen = gamePage(canvasWidth, canvasHeight, context);
 
 export function restartGame() {
-  // let GameScreen = gamePage(canvasWidth, canvasHeight, context);
+  let GameScreen = gamePage(canvasWidth, canvasHeight, context);
 }
 
 let state = modesEnum.HOME;
@@ -65,6 +66,7 @@ function processInput() {
         state = CreditsScreen.processInput(input.keys);
         break;
       case modesEnum.GAME:
+        state = GameScreen.processInput(input.keys);
         break;
   }
 }
@@ -82,6 +84,7 @@ function update(timeStamp) {
     case modesEnum.CREDITS:
       break;
     case modesEnum.GAME:
+      GameScreen.update();
       break;
   }
 }
@@ -108,6 +111,7 @@ function render() {
       CreditsScreen.render();
       break;
     case modesEnum.GAME:
+      GameScreen.render();
       break;
   }
 }
