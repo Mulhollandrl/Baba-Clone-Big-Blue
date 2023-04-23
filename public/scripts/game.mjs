@@ -6,7 +6,7 @@ import { gamePage } from "./GUI/views/gameplay.mjs";
 import { modesEnum } from "./state/enums.mjs";
 // import { Mode } from './state/globals.mjs'
 
-let canvas = document.getElementById("canvas");
+export let canvas = document.getElementById("canvas");
 export let context = canvas.getContext("2d");
 let canvasHeight = window.innerHeight - 175;
 let canvasWidth = canvasHeight*(1 + 7/9);
@@ -24,7 +24,7 @@ let CreditsScreen = creditsPage(canvasWidth, canvasHeight, context);
 let GameScreen = gamePage(canvasWidth, canvasHeight, context);
 
 export function restartGame() {
-  let GameScreen = gamePage(canvasWidth, canvasHeight, context);
+  GameScreen = gamePage(canvasWidth, canvasHeight, context);
 }
 
 let state = modesEnum.HOME;

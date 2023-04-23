@@ -25,7 +25,7 @@ export function gamePage (windowWidth, windowHeight, context){
     }
 
     function render() {
-        
+        entityManager.render();
     }
 
     return {

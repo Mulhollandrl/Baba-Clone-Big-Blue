@@ -9,7 +9,7 @@ export function createBigBlue(spec) {
     let bigBlue = Entity();
 
     // TODO: We need to pass in the specs for spriteSheet and spriteWidth
-    bigBlue.addComponent(Sprite({spriteSheet: 'assets/objects/babaPlayerSprites.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
+    bigBlue.addComponent(Sprite({spriteSheet: 'assets/objects/babaPlayerSpritesStill.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     bigBlue.addComponent(Position({x: spec.x, y: spec.y}));
     bigBlue.addComponent(Noun({nounType: nounTypesEnum.BIGBLUE}));
 
@@ -31,7 +31,7 @@ export function createHedge(spec) {
     let hedge = Entity();
 
     // TODO: We need to pass in the specs for spriteSheet and spriteWidth
-    hedge.addComponent(Sprite({spriteSheet: 'assets/objects/hedgeObjectSprites.png', spriteWidth: 26, spriteIndex: 0, maxSpriteIndex: 3}));
+    hedge.addComponent(Sprite({spriteSheet: 'assets/objects/hedgeObjectSprites.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     hedge.addComponent(Position({x: spec.x, y: spec.y}));
     hedge.addComponent(Property({isStop: true}))
 
@@ -86,7 +86,7 @@ export function createFloor(spec) {
     let floor = Entity();
 
     // TODO: We need to pass in the specs for spriteSheet and spriteWidth
-    floor.addComponent(Sprite({spriteSheet: 'assets/objects/floorObjectSprites.png', spriteWidth: 26, spriteIndex: 0, maxSpriteIndex: 3}));
+    floor.addComponent(Sprite({spriteSheet: 'assets/objects/floorObjectSprites.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     floor.addComponent(Position({x: spec.x, y: spec.y}));
 
     return floor;
@@ -96,7 +96,7 @@ export function createGrass(spec) {
     let grass = Entity();
 
     // TODO: We need to pass in the specs for spriteSheet and spriteWidth
-    grass.addComponent(Sprite({spriteSheet: 'assets/objects/grassObjectSprites.png', spriteWidth: 26, spriteIndex: 0, maxSpriteIndex: 3}));
+    grass.addComponent(Sprite({spriteSheet: 'assets/objects/grassObjectSprites.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     grass.addComponent(Position({x: spec.x, y: spec.y}));
 
     return grass;
