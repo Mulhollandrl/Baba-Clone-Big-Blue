@@ -4,11 +4,17 @@ import * as entityHelpers from "./entityHelpers.mjs"
 import { handleControl } from "./systems/control.mjs"
 import { handlePushing } from "./systems/push.mjs"
 import { handleMovement } from "./systems/movement.mjs"
+import { handleRendering } from "./systems/renderer.mjs"
+import { currentLevel, levels } from "../state/globals.mjs"
 entityHelpers
+
 export default class EntityManager {
   constructor () {
-    this.grid = new Grid()
+    this.grid = new Grid(levels[currentLevel].width, levels[currentLevel].height)
     this.entities = new Set()
+    this.elapsedTime = performance.now();
+    // How often do we change the sprite?
+    this.animationSpeed = 250;
   }
   
   addEntity (entity) {
@@ -36,9 +42,27 @@ export default class EntityManager {
     return found
   }
   
-  update () { // We don't really need a time delta here
+  update (timeStamp) { // We don't really need a time delta here
+    // Do we need to move to the next sprite in the spriteSheet
+    this.changeSprite = false;
+
+    
+    this.elapsedTime += timeStamp;
+    
+    // Figure out if we need to change it
+    if (this.elapsedTime > this.animationSpeed) {
+      this.elapsedTime = 0;
+      this.changeSprite = true;
+    }
+
     handleControl(this)
     handlePushing(this, this.grid)
     handleMovement(this, this.grid)
+  }
+  
+  render() {
+    console.log("RENDER")
+    console.log(this.changeSprite)
+    handleRendering(this, this.grid, this.changeSprite)
   }
 }
