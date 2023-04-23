@@ -31,4 +31,16 @@ export default new (class Keyboard {
     }
     return false
   }
+  
+  /**
+   * Set key pressed to false. Useful when you only want one key press at a time.
+   * @param {string | undefined} key The key to unpress. If undefined, unpresses all keys.
+   */
+  unpress (key) {
+    if (key) {
+      this.keys.delete(key)
+    } else if (key === undefined) {
+      this.keys.clear()
+    }
+  }
 })()
