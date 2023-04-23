@@ -2,7 +2,7 @@ import { componentTypesEnum, entityPropertiesEnum } from "../../state/enums.mjs"
 import { context } from "../../game.mjs";
 import * as entityHelpers from "../entityHelpers.mjs"
 
-export function handleRendering(entityManager, grid) {
+export function handleRendering(entityManager, changeSprite) {
     const animateds = entityManager.queryEntities(entity =>
         entityHelpers.hasAllComponents(entity, componentTypesEnum.SPRITE)
     )
@@ -16,7 +16,9 @@ export function handleRendering(entityManager, grid) {
         const maxSpriteIndex = sprite.maxSpriteIndex;
         const position = animated.getComponent(componentTypesEnum.POSITION);
 
-        animated.spriteIndex++;
+        if (changeSprite) {
+            animated.spriteIndex++;
+        }
 
         if (spriteIndex > maxSpriteIndex) {
             animated.spriteIndex = 0;

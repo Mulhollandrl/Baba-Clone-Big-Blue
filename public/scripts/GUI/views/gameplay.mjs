@@ -12,8 +12,8 @@ export function gamePage (windowWidth, windowHeight, context){
         return modesEnum.GAME;
     }
 
-    function update() {
-        entityManager.update();
+    function update(elapsedTime) {
+        entityManager.update(elapsedTime);
     }
 
     function render() {

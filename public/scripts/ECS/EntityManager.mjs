@@ -10,6 +10,8 @@ export default class EntityManager {
   constructor () {
     this.grid = new Grid()
     this.entities = new Set()
+    this.elapsedTime = performance.now();
+    this.animationSpeed = 750;
   }
   
   addEntity (entity) {
@@ -37,10 +39,19 @@ export default class EntityManager {
     return found
   }
   
-  update () { // We don't really need a time delta here
+  update (timeStamp) { // We don't really need a time delta here
+    let changeSprite = false;
+    
+    this.elapsedTime += timeStamp;
+    
+    if (this.elapsedTime > this.animationSpeed) {
+      this.elapsedTime = 0;
+      changeSprite = true;
+    }
+
     handleControl(this)
     handlePushing(this, this.grid)
     handleMovement(this, this.grid)
-    handleRendering(this, this.grid)
+    handleRendering(this, changeSprite)
   }
 }

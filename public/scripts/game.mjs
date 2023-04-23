@@ -28,6 +28,7 @@ export function restartGame() {
 }
 
 let state = modesEnum.HOME;
+let lastTime = performance.now();
 
 let input = (function() {
   function Keyboard() {
@@ -72,6 +73,8 @@ function processInput() {
 }
 
 function update(timeStamp) {
+  const elapsedTime = timeStamp - lastTime;
+
   switch (state) {
     case modesEnum.HOME:
       HomeScreen.update();
@@ -84,9 +87,11 @@ function update(timeStamp) {
     case modesEnum.CREDITS:
       break;
     case modesEnum.GAME:
-      GameScreen.update();
+      GameScreen.update(elapsedTime);
       break;
   }
+
+  lastTime = timeStamp;
 }
 
 function render() {
