@@ -39,7 +39,6 @@ export function controlsPage (windowWidth, windowHeight, context){
     function processInput(keys) {
         // TODO: We need to put a function here haha
 
-        
         if (keys.hasOwnProperty(controlsKeys.down)) {
             if (locked !== 0 && locked !== 5) {
                 allControls[locked-1].changeVarToFollow(controlsKeys.down);

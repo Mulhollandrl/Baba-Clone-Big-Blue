@@ -5,7 +5,7 @@ import { controlsKeys } from "../../state/globals.mjs";
 import EntityManager from "../../ECS/EntityManager.mjs";
 
 export function gamePage (windowWidth, windowHeight, context){
-    const entityManager = EntityManager;
+    const entityManager = new EntityManager();
 
     function processInput(keys) {
 
