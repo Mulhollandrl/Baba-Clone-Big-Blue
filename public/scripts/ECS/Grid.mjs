@@ -16,7 +16,7 @@ export default class Grid {
     this.height = height
     
     // Create a width*height grid that can hold multiple entities in each position
-    this.grid = Array.from(width * height, () => new Map())
+    this.grid = Array.from({length: width * height}, () => new Map())
   }
   
   _getIndex (x, y) {
@@ -39,7 +39,8 @@ export default class Grid {
   
   addEntity (entity) {
     const {x, y} = this._getPositionFromEntity(entity)
-    this.grid[this._getIndex(x, y)].set(entity.id, entity)
+    const index = this._getIndex(x,y)
+    this.grid[index].set(entity.id, entity)
   }
   
   removeEntity (entity) {

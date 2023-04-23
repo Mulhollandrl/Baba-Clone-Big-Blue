@@ -80,6 +80,7 @@ function update(timeStamp) {
       HomeScreen.update();
       break;
     case modesEnum.LEVELS:
+      LevelsScreen.update();
       break;
     case modesEnum.CONTROLS:
       ControlsScreen.update();

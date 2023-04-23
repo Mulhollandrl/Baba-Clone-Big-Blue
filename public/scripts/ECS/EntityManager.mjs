@@ -5,10 +5,12 @@ import { handleControl } from "./systems/control.mjs"
 import { handlePushing } from "./systems/push.mjs"
 import { handleMovement } from "./systems/movement.mjs"
 import { handleRendering } from "./systems/renderer.mjs"
+import { currentLevel, levels } from "../state/globals.mjs"
 entityHelpers
+
 export default class EntityManager {
   constructor () {
-    this.grid = new Grid()
+    this.grid = new Grid(levels[currentLevel].width, levels[currentLevel].height)
     this.entities = new Set()
     this.elapsedTime = performance.now();
     // How often do we change the sprite?

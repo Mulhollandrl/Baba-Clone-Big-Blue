@@ -11,6 +11,7 @@ let levels = null
 server.get('/levels', async (req, res) => {
   if (!levels) {
     levels = await parseLevels('./levels/levels-all.bbiy')
+    
   }
   res.json(levels)
 })

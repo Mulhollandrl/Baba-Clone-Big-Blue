@@ -19,6 +19,6 @@ export function Sprite(spec) {
         get spriteSheet() { return spec.spriteSheet },
         get spriteWidth() { return spec.spriteWidth },
         get maxSpriteIndex() { return spec.maxSpriteIndex },
-        spriteIndex : spriteIndex
+        spriteIndex : spec.spriteIndex
     }
 }
