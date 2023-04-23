@@ -32,5 +32,22 @@ export const componentTypesEnum = {
     POSITION: 'position',
     PROPERTY: 'property',
     SPRITE: 'sprite',
-    TEXT: 'text'
+    TEXT: 'text',
+    MOVED: 'moved'
+}
+
+export const entityPropertiesEnum = {
+    STOP: 'isStop',
+    PUSH: 'isPush',
+    YOU: 'isYou',
+    WIN: 'isWin',
+    SINK: 'isSink',
+    DEFEAT: 'isDefeat'
+}
+
+export const directionsEnum = {
+    UP: 'up',
+    DOWN: 'down',
+    LEFT: 'left',
+    RIGHT: 'right'
 }
