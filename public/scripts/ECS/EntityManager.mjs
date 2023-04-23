@@ -11,6 +11,7 @@ export default class EntityManager {
     this.grid = new Grid()
     this.entities = new Set()
     this.elapsedTime = performance.now();
+    // How often do we change the sprite?
     this.animationSpeed = 750;
   }
   
@@ -40,10 +41,12 @@ export default class EntityManager {
   }
   
   update (timeStamp) { // We don't really need a time delta here
+    // Do we need to move to the next sprite in the spriteSheet
     let changeSprite = false;
     
     this.elapsedTime += timeStamp;
     
+    // Figure out if we need to change it
     if (this.elapsedTime > this.animationSpeed) {
       this.elapsedTime = 0;
       changeSprite = true;

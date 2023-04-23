@@ -8,6 +8,7 @@ export function handleRendering(entityManager, changeSprite) {
     )
 
     for (let i = 0; i < animateds.length; i++) {
+        // Get all necessary components for drawing it correctly
         const animated = animateds[i];
         const sprite = animated.getComponent(componentTypesEnum.SPRITE);
         const spriteSheet = sprite.spriteSheet;
@@ -16,14 +17,17 @@ export function handleRendering(entityManager, changeSprite) {
         const maxSpriteIndex = sprite.maxSpriteIndex;
         const position = animated.getComponent(componentTypesEnum.POSITION);
 
+        // Go to the next sprite in sheet if applicable
         if (changeSprite) {
             animated.spriteIndex++;
         }
 
+        // Loop sprites to the beginning if needed
         if (spriteIndex > maxSpriteIndex) {
             animated.spriteIndex = 0;
         }
 
+        // It draws the sprite that is necessary on the spriteSheet. The reason it has the ones is because of the borders on the sprites...
         context.drawImage(spriteSheet, (spriteIndex * spriteWidth) + 1, 1, spriteWidth, spriteWidth, position.x, position.y)
     }
 }
