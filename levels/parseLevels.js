@@ -1,5 +1,5 @@
 const fs = require('fs/promises')
-
+let c = 0
 class LevelReader {
   constructor () {
     this.reset()
@@ -34,17 +34,29 @@ class LevelReader {
         } else if (this.step - 3 < this.height * 2) {
           this.foreground += line
         } else {
-          const levelObject = {
-            name: this.name,
-            width: this.width,
-            height: this.height,
-            background: this.background,
-            foreground: this.foreground
-          }
+          const levelObject = this.levelObject()
           this.reset()
           this.handleLine(line)
           return levelObject
         }
+    }
+  }
+  
+  cleanup () {
+    if (this.step > 0) {
+      if (this.height * this.width === this.foreground.length && this.foreground.length === this.background.length) {
+        return this.levelObject()
+      }
+    }
+  }
+  
+  levelObject () {
+    return {
+      name: this.name,
+      width: this.width,
+      height: this.height,
+      background: this.background,
+      foreground: this.foreground
     }
   }
 }
@@ -60,8 +72,17 @@ async function parseLevels (filename) {
       levels.push(maybeLevel)
     }
   }
+  const lastLevel = lineReader.cleanup()
+  if (lastLevel) {
+    levels.push(lastLevel)
+  }
   file.close()
   return levels
 }
+
+setImmediate(async () => {
+  const levels = await parseLevels('levels-all.bbiy')
+  console.log(levels)  
+})
 
 module.exports = parseLevels
