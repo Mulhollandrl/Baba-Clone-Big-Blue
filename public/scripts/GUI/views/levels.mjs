@@ -22,6 +22,8 @@ export function levelsPage (windowWidth, windowHeight, context){
         }
     }).catch(error => console.error(error));
 
+    debugger
+
     function unhoverAll() {
         for (const levelSelect of levelsSelects) {
             levelSelect.unhover();
