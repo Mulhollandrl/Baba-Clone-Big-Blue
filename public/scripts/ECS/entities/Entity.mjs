@@ -12,7 +12,7 @@ export function Entity() {
     }
     
     function removeComponent (componentName) {
-        return componentList.remove(componentName)
+        return componentList.delete(componentName)
     }
 
     return {

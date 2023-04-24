@@ -9,7 +9,7 @@ import * as entityHelpers from "../entityHelpers.mjs"
  */
 export function handleControl (entityManager) {
   const yous = entityManager.queryEntities(entity =>
-    entityHelpers.hasAllProperties(entity, entityPropertiesEnum.YOU)
+    true
   )
   
   let direction
