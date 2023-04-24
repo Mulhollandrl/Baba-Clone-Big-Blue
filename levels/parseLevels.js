@@ -1,5 +1,4 @@
 const fs = require('fs/promises')
-let c = 0
 class LevelReader {
   constructor () {
     this.reset()
