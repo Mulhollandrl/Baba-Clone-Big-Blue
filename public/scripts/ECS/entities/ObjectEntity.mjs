@@ -12,6 +12,7 @@ export function createBigBlue(spec) {
     bigBlue.addComponent(Sprite({spriteSheet: 'assets/objects/babaPlayerSpritesStill.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     bigBlue.addComponent(Position({x: spec.x, y: spec.y}));
     bigBlue.addComponent(Noun({nounType: nounTypesEnum.BIGBLUE}));
+    bigBlue.addComponent(Property());
 
     return bigBlue;
 }
@@ -23,6 +24,7 @@ export function createWall(spec) {
     wall.addComponent(Sprite({spriteSheet: 'assets/objects/wallObjectSprites.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     wall.addComponent(Position({x: spec.x, y: spec.y}));
     wall.addComponent(Noun({nounType: nounTypesEnum.WALL}));
+    wall.addComponent(Property());
 
     return wall;
 }
@@ -45,6 +47,7 @@ export function createFlag(spec) {
     flag.addComponent(Sprite({spriteSheet: 'assets/objects/flagObjectSprites.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     flag.addComponent(Position({x: spec.x, y: spec.y}));
     flag.addComponent(Noun({nounType: nounTypesEnum.FLAG}));
+    flag.addComponent(Property());
 
     return flag;
 }
@@ -56,6 +59,7 @@ export function createRock(spec) {
     rock.addComponent(Sprite({spriteSheet: 'assets/objects/rockObjectSprites.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     rock.addComponent(Position({x: spec.x, y: spec.y}));
     rock.addComponent(Noun({nounType: nounTypesEnum.ROCK}));
+    rock.addComponent(Property());
 
     return rock;
 }
@@ -67,6 +71,7 @@ export function createLava(spec) {
     lava.addComponent(Sprite({spriteSheet: 'assets/objects/lavaObjectSprites.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     lava.addComponent(Position({x: spec.x, y: spec.y}));
     lava.addComponent(Noun({nounType: nounTypesEnum.LAVA}));
+    lava.addComponent(Property());
 
     return lava;
 }
@@ -78,6 +83,7 @@ export function createWater(spec) {
     water.addComponent(Sprite({spriteSheet: 'assets/objects/waterObjectSprites.png', spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     water.addComponent(Position({x: spec.x, y: spec.y}));
     water.addComponent(Noun({nounType: nounTypesEnum.WATER}));
+    water.addComponent(Property());
 
     return water;
 }

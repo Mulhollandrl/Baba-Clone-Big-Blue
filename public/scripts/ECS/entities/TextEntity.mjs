@@ -13,7 +13,7 @@ export function createNoun(spec) {
     noun.addComponent(Sprite({spriteSheet: spec.spriteSheet, spriteWidth: 24, spriteIndex: 0, maxSpriteIndex: 3}));
     noun.addComponent(Position({x: spec.x, y: spec.y}));
     noun.addComponent(Noun({nounType: nounTypesEnum.TEXT}));
-    noun.addComponent(Text({textType: spec.textType}));
+    noun.addComponent(Text({textType: spec.textType, wordType: spec.wordType}));
 
     return noun;
 }

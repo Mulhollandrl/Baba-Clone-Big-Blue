@@ -48,13 +48,13 @@ export function hasAnyComponent (entity, components) {
  */
 export function hasAllProperties (entity, properties) {
   properties = _toArray(properties)
-  const component = entity.getComponent(componentTypesEnum.properties)
-  if (!component) return false
-  for (let i = 0; i < properties.length; i++) {
-    if (!component.hasOwnProperty(properties[i])) {
-      return false
-    }      
+
+  for (let i in properties) {
+    const component = entity.getComponent(properties[i])
+
+    if (!component) return false
   }
+
   return true
 }
 

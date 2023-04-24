@@ -27,6 +27,15 @@ export const nounTypesEnum = {
     TEXT: 'text'
 }
 
+export const adjectiveTypesEnum = {
+    STOP: 'stop',
+    PUSH: 'push',
+    YOU: 'you',
+    WIN: 'win',
+    SINK: 'sink',
+    DEFEAT: 'defeat'
+}
+
 export const componentTypesEnum = {
     INPUT: 'input',
     NOUN: 'noun',

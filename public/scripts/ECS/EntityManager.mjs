@@ -6,6 +6,7 @@ import { handlePushing } from "./systems/push.mjs"
 import { handleMovement } from "./systems/movement.mjs"
 import { handleRendering } from "./systems/renderer.mjs"
 import { currentLevel, levels } from "../state/globals.mjs"
+import { handleRules } from "./systems/rule.mjs"
 entityHelpers
 
 export default class EntityManager {
@@ -58,6 +59,7 @@ export default class EntityManager {
     handleControl(this)
     handlePushing(this, this.grid)
     handleMovement(this, this.grid)
+    handleRules(this, this.grid, levels[currentLevel].width, levels[currentLevel].height)
   }
   
   render() {
