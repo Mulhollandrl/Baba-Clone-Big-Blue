@@ -35,6 +35,15 @@ export function controlsPage (windowWidth, windowHeight, context){
         selectControl.unhover();
         leaveControl.unhover();
     }
+
+    function unselectAll() {
+        upControl.unselect();
+        downControl.unselect();
+        leftControl.unselect();
+        rightControl.unselect();
+        selectControl.unselect();
+        leaveControl.unselect();
+    }
     
     function processInput(keys) {
         // TODO: We need to put a function here haha
@@ -58,6 +67,7 @@ export function controlsPage (windowWidth, windowHeight, context){
             if (locked !== 0 && locked !== 5) {
                 allControls[locked-1].changeVarToFollow(controlsKeys.up);
                 locked = 0;
+                unselectAll();
             } else {
                 selectedButton--;
                 
@@ -76,16 +86,14 @@ export function controlsPage (windowWidth, windowHeight, context){
                 return modesEnum.HOME;
             } else {
                 locked = selectedButton;
+                allControls[selectedButton-1].select();
             }
         }
         
         if (locked !== 0 && locked !== 5 && Object.keys(keys)[0] !== undefined) {
-            console.log(Object.keys(keys)[0])
-            if (locked === 5) {
-                console.log("WRONG!!")
-            }
             allControls[locked-1].changeVarToFollow(Object.keys(keys)[0]);
             locked = 0;
+            unselectAll();
 
             delete Object.keys(keys)[0];
         }

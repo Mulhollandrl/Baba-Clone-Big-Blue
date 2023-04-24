@@ -3,6 +3,7 @@ import { controlsKeys } from "../../state/globals.mjs";
 
 export function textSelect (specs, windowWidth, context, varToFollow){
     let hovered = false;
+    let selected = false;
 
     function render() {
         let text = `${specs.text}`
@@ -11,7 +12,11 @@ export function textSelect (specs, windowWidth, context, varToFollow){
         if (!hovered) {
             context.fillStyle = "#ffffff";
         } else {
-            context.fillStyle = textHoveredColor;
+            if (selected) {
+                context.fillStyle = "#00cc00"
+            } else {
+                context.fillStyle = textHoveredColor;
+            }
         }
 
         context.font = "24px Courier";
@@ -33,6 +38,14 @@ export function textSelect (specs, windowWidth, context, varToFollow){
         hovered = false;
     }
 
+    function select() {
+        selected = true;
+    }
+
+    function unselect() {
+        selected = false;
+    }
+
     function changeVarToFollow(key) {
         controlsKeys[varToFollow] = key;
     }
@@ -41,6 +54,8 @@ export function textSelect (specs, windowWidth, context, varToFollow){
         render : render,
         hover : hover,
         unhover : unhover,
+        select : select,
+        unselect : unselect,
         changeVarToFollow : changeVarToFollow
     }
 }
