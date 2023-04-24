@@ -1,4 +1,4 @@
-import { componentTypesEnum, entityPropertiesEnum, textTypesEnum } from "../../state/enums.mjs";
+import { componentTypesEnum, entityPropertiesEnum, nounTypesEnum, textTypesEnum } from "../../state/enums.mjs";
 import * as entityHelpers from "../entityHelpers.mjs"
 
 export function handleRules(entityManager, grid, levelWidth, levelHeight) {
@@ -79,9 +79,41 @@ function ruleEffects(entityManager, rules) {
             let noun = changers[j].getComponent(componentTypesEnum.NOUN);
 
             switch (whatHappens) {
+                case 'baba':
+                    noun.nounType = nounTypesEnum.BIGBLUE;
+                    break;
+                case 'flag':
+                    noun.nounType = nounTypesEnum.FLAG;
+                    break;
+                case 'kill':
+                    properties.isDefeat = true;
+                    break;
+                case 'lava':
+                    noun.nounType = nounTypesEnum.LAVA;
+                    break;
+                case 'push':
+                    properties.isPush = true;
+                    break;
+                case 'rock':
+                    noun.nounType = nounTypesEnum.ROCK;
+                    break;
+                case 'sink':
+                    properties.isSink = true;
+                    break;
+                case 'stop':
+                    properties.isStop = true;
+                    break;
+                case 'wall':
+                    noun.nounType = nounTypesEnum.WALL;
+                    break;
+                case 'water':
+                    noun.nounType = nounTypesEnum.WATER;
+                    break;
+                case 'win':
+                    properties.isWin = true;
+                    break;
                 case 'you':
                     properties.isYou = true;
-                    console.log(changers[j].getComponent(componentTypesEnum.PROPERTY).isYou)
                     break;
             }
         }
