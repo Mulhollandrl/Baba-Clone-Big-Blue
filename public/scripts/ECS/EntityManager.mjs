@@ -61,8 +61,6 @@ export default class EntityManager {
   }
   
   render() {
-    console.log("RENDER")
-    console.log(this.changeSprite)
     handleRendering(this, this.grid, this.changeSprite)
   }
 }

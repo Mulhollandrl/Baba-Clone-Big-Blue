@@ -4,7 +4,7 @@ import { modesEnum } from "../../state/enums.mjs";
 import { currentLevel, levels, controlsKeys, setCurrentLevel } from "../../state/globals.mjs";
 import { textSelect } from "../utilities/textSelect.mjs";
 
-export function levelsPage (windowWidth, windowHeight, context){
+export function levelsPage (windowWidth, windowHeight, context, resetGame){
     let backButton = button({y: windowHeight - (100), height: 50, text: "Back!"}, windowWidth, context);
     let levelsSelects = [];
     let levelStart = 125;
@@ -21,8 +21,6 @@ export function levelsPage (windowWidth, windowHeight, context){
             levelStart += 50;
         }
     }).catch(error => console.error(error));
-
-    debugger
 
     function unhoverAll() {
         for (const levelSelect of levelsSelects) {
@@ -62,6 +60,7 @@ export function levelsPage (windowWidth, windowHeight, context){
                 return modesEnum.HOME;
             } else {
                 setCurrentLevel(selectedButton - 1);
+                resetGame();
 
                 return modesEnum.GAME;
             }

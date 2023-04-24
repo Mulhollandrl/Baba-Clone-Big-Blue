@@ -12,7 +12,6 @@ export function handleRendering(entityManager, grid, changeSprite) {
         entityHelpers.hasAnyComponent(entity, componentTypesEnum.SPRITE)
     );
 
-    debugger
     context.fillStyle = "#000058"
     context.fillRect(getX(0), getY(0), levelWidth, levelHeight)
 

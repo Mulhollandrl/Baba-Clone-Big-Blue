@@ -18,13 +18,14 @@ canvas.style.width = canvasWidth;
 
 
 let HomeScreen = homePage(canvasWidth, canvasHeight, context);
-let LevelsScreen = levelsPage(canvasWidth, canvasHeight, context);
+let LevelsScreen = levelsPage(canvasWidth, canvasHeight, context, restartGame);
 let ControlsScreen = controlsPage(canvasWidth, canvasHeight, context);
 let CreditsScreen = creditsPage(canvasWidth, canvasHeight, context);
-let GameScreen = gamePage(canvasWidth, canvasHeight, context);
+let GameScreen = gamePage(canvasWidth, canvasHeight, context, restartGame);
 
 export function restartGame() {
-  GameScreen = gamePage(canvasWidth, canvasHeight, context);
+  GameScreen = gamePage(canvasWidth, canvasHeight, context, restartGame);
+  console.log("RESET");
 }
 
 let state = modesEnum.HOME;

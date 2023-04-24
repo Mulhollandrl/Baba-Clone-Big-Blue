@@ -5,11 +5,23 @@ import { controlsKeys } from "../../state/globals.mjs";
 import EntityManager from "../../ECS/EntityManager.mjs";
 import { levelMaker } from "../../ECS/levelMaker.mjs";
 
-export function gamePage (windowWidth, windowHeight, context){
+export function gamePage (windowWidth, windowHeight, context, resetGame){
     let entityManager = null;
     let levelMade = false;
 
     function processInput(keys) {
+        if (keys.hasOwnProperty(controlsKeys.reset)) {
+            resetGame();
+
+            delete keys[controlsKeys.reset]
+        }
+
+        if (keys.hasOwnProperty(controlsKeys.leave)) {
+            delete keys[controlsKeys.leave]
+
+            return modesEnum.LEVELS;
+        }
+
         return modesEnum.GAME;
     }
 
