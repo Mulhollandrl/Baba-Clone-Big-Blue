@@ -79,7 +79,7 @@ async function parseLevels (filename) {
   return levels
 }
 
-setImmediate(async () => {
+const debug = () => setImmediate(async () => {
   const levels = await parseLevels('levels-all.bbiy')
   console.log(levels)  
 })
