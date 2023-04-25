@@ -58,6 +58,59 @@ export function handleRules(entityManager, grid, levelWidth, levelHeight) {
         }
     })
 
+    grid.grid.forEach((element, i) => {
+        if (element.size > 0) {
+            let rule = [];
+            // Find the entities at the current cell
+            const entitiesAtI = grid.getEntities(i % levelWidth, Math.floor(i / levelHeight))
+
+            // Go through all of the entities at i
+            for (let j = 0; j < entitiesAtI.length; j++) {
+                // If it is not undefined and it is text
+                if (entitiesAtI[j] !== undefined) {
+                    if (entityHelpers.hasAllProperties(entitiesAtI[j], componentTypesEnum.TEXT)) {
+                        // If this entity is a noun or adjective, move on
+                        if (entitiesAtI[j].getComponent(componentTypesEnum.TEXT).textType === textTypesEnum.ADJECTIVE || entitiesAtI[j].getComponent(componentTypesEnum.TEXT).textType === textTypesEnum.NOUN) {
+                            // Add the wordType to the rule executor list
+                            rule.push(entitiesAtI[j].getComponent(componentTypesEnum.TEXT).wordType)
+
+                            // Find all of the entities one space to the up
+                            const entitiesAtUp = grid.getEntities((i - levelWidth) % levelWidth, Math.floor((i - levelWidth) / levelHeight))
+
+                            // Then iterate through those entities
+                            for (let k = 0; k < entitiesAtUp.length; k++) {
+                                // If it is not undefined and it is text
+                                if (entitiesAtUp[k] !== undefined) {
+                                    if (entityHelpers.hasAllProperties(entitiesAtUp[k], componentTypesEnum.TEXT)) {
+                                        // If this entity is a verb (is), move on
+                                        if (entitiesAtUp[k].getComponent(componentTypesEnum.TEXT).textType === textTypesEnum.VERB) {
+                                            // Get the entities two to the up
+                                            const entitiesAtUpUp = grid.getEntities((i - (2 * levelWidth)) % levelWidth, Math.floor((i - (2 * levelWidth)) / levelHeight))
+
+                                            // Then iterate through those entities
+                                            for (let l = 0; l < entitiesAtUpUp.length; l++) {
+                                                // If it is not undefined and it is text
+                                                if (entitiesAtUpUp[l] !== undefined) {
+                                                    if (entityHelpers.hasAllProperties(entitiesAtUpUp[l], componentTypesEnum.TEXT)) {
+                                                        // If this entity is an noun, add it to the rule and add the rule to allrules
+                                                        if (entitiesAtUpUp[l].getComponent(componentTypesEnum.TEXT).textType === textTypesEnum.NOUN) {
+                                                            rule.push(entitiesAtUpUp[l].getComponent(componentTypesEnum.TEXT).wordType)
+                                                            allRules.push(rule)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+
     ruleEffects(entityManager, allRules)
 }
 
