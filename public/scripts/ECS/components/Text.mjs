@@ -1,4 +1,4 @@
-import { textTypesEnum } from "../../state/enums.mjs"
+import { nounTypesEnum, textTypesEnum } from "../../state/enums.mjs"
 
 // Text is a text object. These are the words. There is a noun text type, and that is the WORD Baba, not actually Baba
 export function Text(spec) {
@@ -7,7 +7,8 @@ export function Text(spec) {
     // Define a default Text
     if (spec == undefined) {
         spec = {
-            textType: textTypesEnum.VERB
+            textType: textTypesEnum.VERB,
+            wordType: nounTypesEnum.BIGBLUE
         }
     }
 
@@ -16,6 +17,7 @@ export function Text(spec) {
 
     // Make it so that you can retrieve all of them
     return {
+        get wordType() { return spec.wordType },
         get name() { return spec.name },
         textType : spec.textType
     }
