@@ -25,16 +25,16 @@ export function handlePushing (entityManager, grid) {
 
 function recursivePush (grid, position, direction, magnitude) { // returns boolean if move is successful
   magnitude = magnitude ?? 1
-  const adjacentEntities = grid.adjacentEntities(position, direction, magnitude)
+  const adjacentEntities = grid.getAdjacentEntities(position, direction, magnitude)
   if (adjacentEntities.length === 0) {
     return true
   }
   const pushable = []
   for (let i = 0; i < adjacentEntities.length; i++) {
     const entity = adjacentEntities[i]
-    if (entityHelpers.hasAllProperties(entityPropertiesEnum.PUSH)) {
+    if (entityHelpers.hasAllProperties(entity, entityPropertiesEnum.PUSH)) {
       pushable.push(entity) // push and stop is still push
-    } else if (entityHelpers.hasAllProperties(entityPropertiesEnum.STOP)) {
+    } else if (entityHelpers.hasAllProperties(entity, entityPropertiesEnum.STOP)) {
       return false
     }
   }

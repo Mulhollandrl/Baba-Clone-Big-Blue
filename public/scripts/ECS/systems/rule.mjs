@@ -66,8 +66,6 @@ function ruleEffects(entityManager, rules) {
         entityHelpers.hasAnyComponent(entity, componentTypesEnum.NOUN)
     );
 
-    debugger
-
     for (let i = 0; i < rules.length; i++) {
         const ruleToDo = rules[i];
         const whatHappens = ruleToDo[0];
