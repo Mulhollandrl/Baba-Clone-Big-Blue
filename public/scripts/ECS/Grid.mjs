@@ -16,7 +16,11 @@ export default class Grid {
     this.height = height
     
     // Create a width*height grid that can hold multiple entities in each position
-    this.grid = Array.from({length: width * height}, () => new Map())
+    this.clear()
+  }
+  
+  clear () {
+    this.grid = Array.from({length: this.width * this.height}, () => new Map())
   }
   
   _getIndex (x, y) {

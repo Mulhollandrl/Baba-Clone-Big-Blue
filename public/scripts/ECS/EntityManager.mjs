@@ -8,7 +8,8 @@ import { handleRendering } from "./systems/renderer.mjs"
 import { currentLevel, levels } from "../state/globals.mjs"
 import { handleRules } from "./systems/rule.mjs"
 import { checkForAll } from "./systems/objectEffects.mjs"
-entityHelpers
+import { deepCopy } from "../utilities/deepCopy.mjs"
+import { EntityFromComponents } from "./entities/Entity.mjs"
 
 export default class EntityManager {
   constructor () {
@@ -19,6 +20,23 @@ export default class EntityManager {
     this.animationSpeed = 250;
     this.stillAlive = true;
     this.win = false;
+    this.undoStack = []
+  }
+  
+  saveState () {
+    this.undoStack.push(deepCopy([...this.entities.values()].map(entity => entity.clone())))
+  }
+  
+  restore () {
+    const oldState = this.undoStack.pop()
+    if (!oldState) {
+      return
+    }
+    this.entities.clear()
+    this.grid.clear()
+    for (const entity of oldState) {
+      this.addEntity(EntityFromComponents(entity))
+    }
   }
   
   addEntity (entity) {
