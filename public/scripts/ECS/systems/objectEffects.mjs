@@ -28,12 +28,15 @@ function checkForDefeat(entityManager, nouns) {
 
                     if (entityPosition.x == elementPosition.x && entityPosition.y == elementPosition.y) {
                         entityManager.removeEntity(entity);
-                        // TODO: We need to check if all yous are gone.
                     }
                 }
             });
         }
     });
+
+    if (entityManager.queryEntities(entity => entityHelpers.hasProperty(entity, entityPropertiesEnum.YOU)).length === 0) {
+        return true;
+    }
     
     return false;
 }
