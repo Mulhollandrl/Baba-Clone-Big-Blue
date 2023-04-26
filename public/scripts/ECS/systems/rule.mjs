@@ -53,9 +53,6 @@ function ruleEffects(entityManager, rules) {
             return nounType && nounType !== nounTypesEnum.TEXT
         }
     ).forEach(entity => {
-        if (entity.getComponent(componentTypesEnum.SPRITE).spriteSheet === 'assets/objects/hedgeObjectSprites.png') {
-            console.log('destroying hedge properties...')
-        }
         entity.addComponent(Property())
     }) // Clear properties of all nouns
         
@@ -71,7 +68,6 @@ function ruleEffects(entityManager, rules) {
             entity.getComponent(componentTypesEnum.NOUN)?.nounType === subject.wordType
         )
         
-        console.log(toChange.length)
         for (let j = 0; j < toChange.length; j++) {
             // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
             toChange[j].getComponent(componentTypesEnum.NOUN).nounType = predicate.wordType;
