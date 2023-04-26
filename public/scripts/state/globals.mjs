@@ -9,7 +9,8 @@ export let controlsKeys = {
     right: 'd',
     select: 'Enter',
     leave: 'Escape',
-    reset: 'r'
+    reset: 'r',
+    undo: 'z'
 };
 
 // THIS IS ALL FOR KEEPING TRACK OF CURRENT LEVELS AND ALL LEVELS. This is the best I could do honestly haha.

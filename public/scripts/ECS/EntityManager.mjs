@@ -73,6 +73,7 @@ export default class EntityManager {
 
     this.stillAlive = !(checks[0]);
     this.win = checks[1];
+    console.log(checks)
   }
   
   render() {
