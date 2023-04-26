@@ -24,7 +24,10 @@ export const nounTypesEnum = {
     ROCK: 'rock',
     LAVA: 'lava',
     WATER: 'water',
-    TEXT: 'text'
+    TEXT: 'text',
+    HEDGE: 'hedge',
+    FLOOR: 'floor',
+    GRASS: 'grass'
 }
 
 export const adjectiveTypesEnum = {
@@ -60,4 +63,16 @@ export const directionsEnum = {
     DOWN: 'down',
     LEFT: 'left',
     RIGHT: 'right'
+}
+
+export const spriteSheetEnum = {
+    [nounTypesEnum.BIGBLUE]: 'assets/objects/babaPlayerSprites.png',
+    [nounTypesEnum.WALL]: 'assets/objects/wallObjectSprites.png',
+    [nounTypesEnum.FLAG]: 'assets/objects/flagObjectSprites.png',
+    [nounTypesEnum.ROCK]: 'assets/objects/rockObjectSprites.png',
+    [nounTypesEnum.LAVA]: 'assets/objects/lavaObjectSprites.png',
+    [nounTypesEnum.WATER]: 'assets/objects/waterObjectSprites.png',    
+    [nounTypesEnum.HEDGE]: 'assets/objects/hedgeObjectSprites.png',
+    [nounTypesEnum.FLOOR]: 'assets/objects/floorObjectSprites.png',
+    [nounTypesEnum.GRASS]: 'assets/objects/grassObjectSprites.png'
 }

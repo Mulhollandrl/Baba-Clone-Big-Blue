@@ -9,7 +9,7 @@ export function handleRendering(entityManager, grid, changeSprite) {
       } = positionGrid(grid.width, grid.height)
 
     const animateds = entityManager.queryEntities(entity =>
-        entityHelpers.hasAnyComponent(entity, componentTypesEnum.SPRITE)
+        entityHelpers.hasAllComponents(entity, [componentTypesEnum.SPRITE, componentTypesEnum.POSITION])
     );
 
     context.fillStyle = "#000058"

@@ -20,60 +20,14 @@ export function hasAllComponents (entity, components) {
   return true
 }
 
-
 /**
- * Does this entity have any of these components?
+ * Does this entity have this property?
  * @param {Entity} entity 
- * @param {Component | Component[]} components 
+ * @param {property} property e.g. isPush 
  * @returns 
  */
-export function hasAnyComponent (entity, components) {
-  components = _toArray(components) // Force single values into arrays for ease of use
-  const entityComponents = entity.componentList
-  // for loop is equivalent to `components.some(component => entityComponents.has(component))`
-  for (let i = 0; i < components.length; i++) {
-    if (entityComponents.has(components[i])) {
-      return true
-    }
-  }
-  return false
-}
-
-
-/**
- * Does this entity have all of these properties?
- * @param {Entity} entity 
- * @param {property | property[]} properties e.g. isPush 
- * @returns 
- */
-export function hasAllProperties (entity, properties) {
-  properties = _toArray(properties)
-
-  for (let i in properties) {
-    const component = entity.getComponent(properties[i])
-
-    if (!component) return false
-  }
-
-  return true
-}
-
-/**
- * Does this entity have any of these properties?
- * @param {Entity} entity 
- * @param {property | property[]} properties e.g. isPush 
- * @returns 
- */
-export function hasAnyProperties (entity, properties) {
-  properties = _toArray(properties)
-  const component = entity.getComponent(componentTypesEnum.properties)
-  if (!component) return false
-  for (let i = 0; i < properties.length; i++) {
-    if (component.hasOwnProperty(properties[i])) {
-      return true
-    }      
-  }
-  return false
+export function hasProperty (entity, property) {
+  return entity.getComponent(componentTypesEnum.PROPERTY)?.[property]
 }
 
 function _toArray (maybeArray) {

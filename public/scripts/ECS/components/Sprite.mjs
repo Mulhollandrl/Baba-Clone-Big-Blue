@@ -16,9 +16,9 @@ export function Sprite(spec) {
     // Make it so that you can retrieve all of them
     return {
         get name() { return spec.name },
-        get spriteSheet() { return spec.spriteSheet },
         get spriteWidth() { return spec.spriteWidth },
         get maxSpriteIndex() { return spec.maxSpriteIndex },
+        spriteSheet: spec.spriteSheet,
         spriteIndex : spec.spriteIndex
     }
 }

@@ -33,27 +33,43 @@ export default class Grid {
       case directionsEnum.LEFT: return {x: -1, y: 0}
       case directionsEnum.DOWN: return {x: 0, y: 1}
       case directionsEnum.UP: return {x: 0, y: -1}
-      default: throw new DeveloperError(`_getVectorFromDirection: invalid direction: ${direction}`)
+      default: throw new Error(`_getVectorFromDirection: invalid direction: ${direction}`)
     }
+  }
+  
+  _invalidPositionError (x, y) {
+    return `(${x}, ${y}) is not a valid position on the (${this.width} x ${this.height}) grid`
   }
   
   addEntity (entity) {
     const {x, y} = this._getPositionFromEntity(entity)
     const index = this._getIndex(x,y)
+    if (!this.isValidCoordinate(x, y)) {
+      console.error(entity)
+      throw new Error(`Grid.mjs::addEntity: ${this._invalidPositionError(x, y)}`)
+    }
     this.grid[index].set(entity.id, entity)
   }
   
   removeEntity (entity) {
     const {x, y} = this._getPositionFromEntity(entity)
+    if (!this.isValidCoordinate(x, y)) {
+      console.error(entity)
+      throw new Error(`Grid.mjs::removeEntity: ${this._invalidPositionError(x, y)}`)
+    }
     this.grid[this._getIndex(x, y)].delete(entity.id)
   }
   
-  moveEntity (entity) {
+  moveEntity (entity, direction) {
     this.removeEntity(entity)
     const position = this._getPositionFromEntity(entity)
-    const direction = this._getVectorFromDirection(direction)
-    position.x += direction.x
-    position.y += direction.y
+    const vector = this._getVectorFromDirection(direction)
+    position.x += vector.x
+    position.y += vector.y
+    if (!this.isValidCoordinate(position.x, position.y)) {
+      console.error(entity)
+      throw new Error(`Grid.mjs::moveEntity: ${this._invalidPositionError(position.x, position.y)}`)
+    }
     this.addEntity(entity)
   }
     
@@ -69,33 +85,21 @@ export default class Grid {
     return [...this.grid[index].values()]
   }
   
-  getAdjacentEntities (position, direction, length) {
-    length = length ?? 1
-    const {x, y} = this.position
-    const {x: dx, y: dy} = this._getVectorFromDirection(direction)
-    return this.getEntities(x + dx * length, y + dy * length)
-  }
-  
   isValidCoordinate (x, y) {
     return x >= 0 && x < this.width && y >= 0 && y < this.height
   }
   
   /**
-   * Gets a list of entities in the direction of another entity.
-   * @param {*} entity 
-   * @param {*} direction 
+   * Gets a list of entities in the direction of a position
+   * @param {*} position 
+   * @param {*} direction
+   * @param {*} length
    * @returns 
    */
-  getAdjacentEntities(entity, direction) {
-    const {x, y} = this._getPositionFromEntity(entity)
-    const adjacentCoordinate = {
-      x: x + direction.x,
-      y: y + direction.y
-    }
-
-    return this.getEntities(
-      adjacentCoordinate.x,
-      adjacentCoordinate.y
-    )
+  getAdjacentEntities (position, direction, length) {
+    length = length ?? 1
+    const {x, y} = position
+    const {x: dx, y: dy} = this._getVectorFromDirection(direction)
+    return this.getEntities(x + dx * length, y + dy * length)
   }
 }
