@@ -54,12 +54,13 @@ function checkForSink(entityManager, nouns) {
     listToCheck.forEach(element => {
         if (element.getComponent(componentTypesEnum.PROPERTY).isSink === true) {
             listToCheck.forEach(entity => {
-                if (entity != element && entity.getComponent(componentTypesEnum.PROPERTY).isYou == false) {
+                if (entity != element) {
                     const entityPosition = entity.getComponent(componentTypesEnum.POSITION);
                     const elementPosition = element.getComponent(componentTypesEnum.POSITION);
 
                     if (entityPosition.x == elementPosition.x && entityPosition.y == elementPosition.y) {
                         entityManager.removeEntity(entity);
+                        entityManager.removeEntity(element);
                     }
                 }
             });
