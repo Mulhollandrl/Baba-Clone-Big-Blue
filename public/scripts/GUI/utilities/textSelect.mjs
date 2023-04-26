@@ -48,6 +48,7 @@ export function textSelect (specs, windowWidth, context, varToFollow){
 
     function changeVarToFollow(key) {
         controlsKeys.data[varToFollow] = key;
+        controlsKeys.set(controlsKeys.data)
     }
 
     return {
