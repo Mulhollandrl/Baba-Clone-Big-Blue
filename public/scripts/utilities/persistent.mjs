@@ -8,7 +8,7 @@ export default class Persistent {
    */
   constructor (name, defaultData) {
     this.name = name
-    if (localStorage.hasItem(name)) {
+    if (localStorage.getItem(name) !== null) {
       this.get(true)
     } else {
       this.set(defaultData)
@@ -22,10 +22,11 @@ export default class Persistent {
    * @returns {T}
    */
   get (live) {
-    if (live && localStorage.hasItem(this.name)) {
-      const dataString = localStorage.get(this.name)
+    if (live && localStorage.getItem(this.name) !== null) {
+      const dataString = localStorage.getItem(this.name)
       this.data = JSON.parse(dataString)
     }
+    
     return this.data
   }
   

@@ -48,9 +48,9 @@ export function controlsPage (windowWidth, windowHeight, context){
     function processInput(keys) {
         // TODO: We need to put a function here haha
 
-        if (keys.hasOwnProperty(controlsKeys.down)) {
+        if (keys.hasOwnProperty(controlsKeys.data.down)) {
             if (locked !== 0 && locked !== 5) {
-                allControls[locked-1].changeVarToFollow(controlsKeys.down);
+                allControls[locked-1].changeVarToFollow(controlsKeys.data.down);
                 locked = 0;
             } else {
                 selectedButton++;
@@ -60,12 +60,12 @@ export function controlsPage (windowWidth, windowHeight, context){
                 }
             }
 
-            delete keys[controlsKeys.down]
+            delete keys[controlsKeys.data.down]
         }
 
-        if (keys.hasOwnProperty(controlsKeys.up)) {
+        if (keys.hasOwnProperty(controlsKeys.data.up)) {
             if (locked !== 0 && locked !== 5) {
-                allControls[locked-1].changeVarToFollow(controlsKeys.up);
+                allControls[locked-1].changeVarToFollow(controlsKeys.data.up);
                 locked = 0;
                 unselectAll();
             } else {
@@ -76,11 +76,11 @@ export function controlsPage (windowWidth, windowHeight, context){
                 }
             }
             
-            delete keys[controlsKeys.up];
+            delete keys[controlsKeys.data.up];
         }
         
-        if (keys.hasOwnProperty(controlsKeys.select)) {
-            delete keys[controlsKeys.select];
+        if (keys.hasOwnProperty(controlsKeys.data.select)) {
+            delete keys[controlsKeys.data.select];
             
             if (selectedButton === 0) {
                 return modesEnum.HOME;

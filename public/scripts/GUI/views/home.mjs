@@ -23,28 +23,28 @@ export function homePage (windowWidth, windowHeight, context){
             }
         }
 
-        if (keys.hasOwnProperty(controlsKeys.down)) {
+        if (keys.hasOwnProperty(controlsKeys.data.down)) {
             selectedButton++;
 
             if (selectedButton > 2) {
                 selectedButton = 0;
             }
 
-            delete keys[controlsKeys.down];
+            delete keys[controlsKeys.data.down];
         }
 
-        if (keys.hasOwnProperty(controlsKeys.up)) {
+        if (keys.hasOwnProperty(controlsKeys.data.up)) {
             selectedButton--;
 
             if (selectedButton < 0) {
                 selectedButton = 2;
             }
             
-            delete keys[controlsKeys.up];
+            delete keys[controlsKeys.data.up];
         }
 
-        if (keys.hasOwnProperty(controlsKeys.select)) {
-            delete keys[controlsKeys.select];
+        if (keys.hasOwnProperty(controlsKeys.data.select)) {
+            delete keys[controlsKeys.data.select];
 
             switch (selectedButton) {
                 case 0:

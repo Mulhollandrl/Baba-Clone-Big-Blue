@@ -9,8 +9,8 @@ export function creditsPage (windowWidth, windowHeight, context){
     function processInput(keys) {
         // TODO: We need to put a function here haha
 
-        if (keys.hasOwnProperty(controlsKeys.select)) {
-            delete keys[controlsKeys.select]
+        if (keys.hasOwnProperty(controlsKeys.data.select)) {
+            delete keys[controlsKeys.data.select]
 
             return modesEnum.HOME;
         }

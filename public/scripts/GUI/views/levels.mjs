@@ -36,29 +36,29 @@ export function levelsPage (windowWidth, windowHeight, context, resetGame){
     function processInput(keys) {
         audio.play();
 
-        if (keys.hasOwnProperty(controlsKeys.down)) {
+        if (keys.hasOwnProperty(controlsKeys.data.down)) {
             selectedButton++;
 
             if (selectedButton > levelsSelects.length) {
                 selectedButton = 0
             }
 
-            delete keys[controlsKeys.down]
+            delete keys[controlsKeys.data.down]
         }
 
-        if (keys.hasOwnProperty(controlsKeys.up)) {
+        if (keys.hasOwnProperty(controlsKeys.data.up)) {
             selectedButton--;
             
             if (selectedButton < 0) {
                 selectedButton = levelsSelects.length;
             }
             
-            delete keys[controlsKeys.up];
+            delete keys[controlsKeys.data.up];
         }
 
-        if (keys.hasOwnProperty(controlsKeys.select)) {
+        if (keys.hasOwnProperty(controlsKeys.data.select)) {
             audio.pause();
-            delete keys[controlsKeys.select];
+            delete keys[controlsKeys.data.select];
 
             if (selectedButton === 0) {
                 return modesEnum.HOME;
