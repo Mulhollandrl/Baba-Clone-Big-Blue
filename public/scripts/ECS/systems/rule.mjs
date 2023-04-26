@@ -100,16 +100,17 @@ function ruleEffects(entityManager, rules) {
             toChange[j].getComponent(componentTypesEnum.NOUN).nounType = predicate.wordType;
             toChange[j].getComponent(componentTypesEnum.SPRITE).spriteSheet = spriteSheetEnum[predicate.wordType]
         }
+    }
         
     for (let i = 0; i < adjectiveRules.length; i++) {
         const [subject, predicate] = adjectiveRules[i]
         const toChange = entityManager.queryEntities(entity =>
             entity.getComponent(componentTypesEnum.NOUN)?.nounType === subject.wordType
-            )
+        )
     
-            for (let j = 0; j < toChange.length; j++) {
-                // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
-                const properties = toChange[j].getComponent(componentTypesEnum.PROPERTY)
+        for (let j = 0; j < toChange.length; j++) {
+            // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
+            const properties = toChange[j].getComponent(componentTypesEnum.PROPERTY)
         
         switch (predicate.wordType) {
             case adjectiveTypesEnum.DEFEAT:
@@ -124,15 +125,15 @@ function ruleEffects(entityManager, rules) {
             case adjectiveTypesEnum.STOP:
                 properties.isStop = true;
                 break;
-                case adjectiveTypesEnum.WIN:
-                    winUnlock.play();
-                    properties.isWin = true;
-                    break;
-                    case adjectiveTypesEnum.YOU:
-                        properties.isYou = true;
-                        break;
-                    }
-                }
+            case adjectiveTypesEnum.WIN:
+                winUnlock.play();
+                properties.isWin = true;
+                break;
+            case adjectiveTypesEnum.YOU:
+                properties.isYou = true;
+                break;
+            }
+        }
     }
 
     const newWins = new Set(entityManager.queryEntities(
