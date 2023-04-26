@@ -12,7 +12,7 @@ export function handleRendering(entityManager, grid, changeSprite) {
         entityHelpers.hasAllComponents(entity, [componentTypesEnum.SPRITE, componentTypesEnum.POSITION])
     );
 
-    context.fillStyle = "#000058"
+    context.fillStyle = "#415080"
     context.fillRect(getX(0), getY(0), levelWidth, levelHeight)
 
     for (let i = 0; i < animateds.length; i++) {

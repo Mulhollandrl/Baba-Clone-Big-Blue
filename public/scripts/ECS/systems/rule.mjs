@@ -3,6 +3,28 @@ import { Property } from "../components/Property.mjs";
 import * as entityHelpers from "../entityHelpers.mjs"
 import { mergeSets, cartesianProduct, filterSet } from "../../utilities/setutils.mjs";
 
+let winUnlock = new Audio("../../../assets/sounds/unlockWin.mp3")
+let soundPlayed = false;
+
+winUnlock.loop = false;
+
+winUnlock.onended = function() {
+    winUnlock = new Audio();
+    // winUnlock.currentTime = 0;
+    soundPlayed = true;
+}
+
+function playSound() {
+    winUnlock = new Audio("../../../assets/sounds/unlockWin.mp3")
+    winUnlock.play();
+
+    winUnlock.onended = function() {
+        winUnlock = new Audio();
+        // winUnlock.currentTime = 0;
+        soundPlayed = true;
+    }
+}
+
 const onlyText = entity => entityHelpers.hasAllComponents(entity, componentTypesEnum.TEXT)
 export function handleRules(entityManager, grid) {
     const allSentences = new Set();
@@ -42,11 +64,16 @@ export function handleRules(entityManager, grid) {
         }        
         return false
     })
-
+    
     ruleEffects(entityManager, rules.values())
 }
 
 function ruleEffects(entityManager, rules) {
+    const oldWins = new Set(entityManager.queryEntities(
+        entity => entityHelpers.hasProperty(entity, entityPropertiesEnum.WIN)
+    ).map(entity => entity.id));
+
+    
     entityManager.queryEntities(
         entity => {
             const nounType = entity.getComponent(componentTypesEnum.NOUN)?.nounType
@@ -55,7 +82,7 @@ function ruleEffects(entityManager, rules) {
     ).forEach(entity => {
         entity.addComponent(Property())
     }) // Clear properties of all nouns
-        
+    
     const adjectiveRules = []
     for (const rule of rules) {
         const predicate = rule[1].getComponent(componentTypesEnum.TEXT);
@@ -73,38 +100,53 @@ function ruleEffects(entityManager, rules) {
             toChange[j].getComponent(componentTypesEnum.NOUN).nounType = predicate.wordType;
             toChange[j].getComponent(componentTypesEnum.SPRITE).spriteSheet = spriteSheetEnum[predicate.wordType]
         }
-    }
-    
+        
     for (let i = 0; i < adjectiveRules.length; i++) {
         const [subject, predicate] = adjectiveRules[i]
         const toChange = entityManager.queryEntities(entity =>
             entity.getComponent(componentTypesEnum.NOUN)?.nounType === subject.wordType
-        )
+            )
+    
+            for (let j = 0; j < toChange.length; j++) {
+                // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
+                const properties = toChange[j].getComponent(componentTypesEnum.PROPERTY)
         
-        for (let j = 0; j < toChange.length; j++) {
-            // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
-            const properties = toChange[j].getComponent(componentTypesEnum.PROPERTY)
-            
-            switch (predicate.wordType) {
-                case adjectiveTypesEnum.DEFEAT:
-                    properties.isDefeat = true;
-                    break;
-                case adjectiveTypesEnum.PUSH:
-                    properties.isPush = true;
-                    break;
+        switch (predicate.wordType) {
+            case adjectiveTypesEnum.DEFEAT:
+                properties.isDefeat = true;
+                break;
+            case adjectiveTypesEnum.PUSH:
+                properties.isPush = true;
+                break;
                 case adjectiveTypesEnum.SINK:
                     properties.isSink = true;
-                    break;
-                case adjectiveTypesEnum.STOP:
-                    properties.isStop = true;
-                    break;
+                break;
+            case adjectiveTypesEnum.STOP:
+                properties.isStop = true;
+                break;
                 case adjectiveTypesEnum.WIN:
+                    winUnlock.play();
                     properties.isWin = true;
                     break;
-                case adjectiveTypesEnum.YOU:
-                    properties.isYou = true;
-                    break;
-            }
+                    case adjectiveTypesEnum.YOU:
+                        properties.isYou = true;
+                        break;
+                    }
+                }
+    }
+
+    const newWins = new Set(entityManager.queryEntities(
+        entity => entityHelpers.hasProperty(entity, entityPropertiesEnum.WIN)
+    ).map(entity => entity.id));
+    
+    // console.log("Old Wins ", [...oldWins.values()])
+    // console.log("New Wins ", [...newWins.values()])
+
+    for (const win of newWins.values()) {
+        if (!oldWins.has(win)) {
+            console.log("DING!!")
+            playSound()
+            break;
         }
     }
 }

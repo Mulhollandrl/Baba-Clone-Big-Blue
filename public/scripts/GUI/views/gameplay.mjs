@@ -9,9 +9,11 @@ export function gamePage (windowWidth, windowHeight, context, resetGame){
     let audio = new Audio();
     let entityManager = null;
     let levelMade = false;
-    let gameOverText = `GAME OVER! Press ${controlsKeys.undo} to undo!`;
-    let winText = `YOU WIN!! Press ${controlsKeys.leave} to go to levels!`;
+    let gameOverText = `GAME OVER! Press ${controlsKeys.data.undo} to undo!`;
+    let winText = `YOU WIN!! Press ${controlsKeys.data.leave} to go to levels!`;
+    let winSoundPlayed = false;
     const randomSong = Math.floor(Math.random() * 7);
+    const winSound = new Audio("../../../assets/sounds/win.mp3")
 
     audio.loop = true;
 
@@ -42,16 +44,16 @@ export function gamePage (windowWidth, windowHeight, context, resetGame){
     function processInput(keys) {
         audio.play();
 
-        if (keys.hasOwnProperty(controlsKeys.reset)) {
+        if (keys.hasOwnProperty(controlsKeys.data.reset)) {
             audio.currentTime = 0;
             resetGame();
 
-            delete keys[controlsKeys.reset]
+            delete keys[controlsKeys.data.reset]
         }
 
-        if (keys.hasOwnProperty(controlsKeys.leave)) {
+        if (keys.hasOwnProperty(controlsKeys.data.leave)) {
             audio.pause();
-            delete keys[controlsKeys.leave]
+            delete keys[controlsKeys.data.leave]
 
             return modesEnum.LEVELS;
         }
@@ -83,6 +85,11 @@ export function gamePage (windowWidth, windowHeight, context, resetGame){
         }
 
         if (entityManager.win) {
+            if (!winSoundPlayed) {
+                winSound.play();
+                winSoundPlayed = true;
+            }
+
             context.fillStyle = "white"
             context.font = "48px Courier";
 

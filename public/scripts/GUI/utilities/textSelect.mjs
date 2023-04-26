@@ -23,7 +23,7 @@ export function textSelect (specs, windowWidth, context, varToFollow){
         let fontHeight = context.measureText("m").width;
 
         if (varToFollow !== undefined) {
-            text = `${specs.text}${controlsKeys[varToFollow]}`
+            text = `${specs.text}${controlsKeys.data[varToFollow]}`
         }
 
         context.fillText(text, (windowWidth/2) - (context.measureText(text).width/2), specs.y + (specs.height/2) + (fontHeight/2));
@@ -47,7 +47,7 @@ export function textSelect (specs, windowWidth, context, varToFollow){
     }
 
     function changeVarToFollow(key) {
-        controlsKeys[varToFollow] = key;
+        controlsKeys.data[varToFollow] = key;
     }
 
     return {

@@ -21,13 +21,13 @@ function handlePlayer(entityManager) {
     return false
   }
   let direction
-  if (Keyboard.isPressed(controlsKeys.up)) {
+  if (Keyboard.isPressed(controlsKeys.data.up)) {
     direction = directionsEnum.UP
-  } else if (Keyboard.isPressed(controlsKeys.down)) {
+  } else if (Keyboard.isPressed(controlsKeys.data.down)) {
     direction = directionsEnum.DOWN
-  } else if (Keyboard.isPressed(controlsKeys.left)) {
+  } else if (Keyboard.isPressed(controlsKeys.data.left)) {
     direction = directionsEnum.LEFT
-  } else if (Keyboard.isPressed(controlsKeys.right)) {
+  } else if (Keyboard.isPressed(controlsKeys.data.right)) {
     direction = directionsEnum.RIGHT
   }
   else {
