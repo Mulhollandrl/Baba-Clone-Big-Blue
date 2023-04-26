@@ -46,6 +46,7 @@ export function gamePage (windowWidth, windowHeight, context, resetGame){
 
         if (keys.hasOwnProperty(controlsKeys.data.reset)) {
             audio.currentTime = 0;
+            audio.pause();
             resetGame();
 
             delete keys[controlsKeys.data.reset]
