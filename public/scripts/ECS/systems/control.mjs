@@ -1,5 +1,5 @@
 import Keyboard from "../../inputs/Keyboard.js";
-import { directionsEnum, entityPropertiesEnum } from "../../state/enums.mjs";
+import { componentTypesEnum, directionsEnum, entityPropertiesEnum } from "../../state/enums.mjs";
 import { controlsKeys } from "../../state/globals.mjs";
 import { Moved } from "../components/Moved.mjs";
 import * as entityHelpers from "../entityHelpers.mjs"
@@ -9,9 +9,8 @@ import * as entityHelpers from "../entityHelpers.mjs"
  */
 export function handleControl (entityManager) {
   const yous = entityManager.queryEntities(entity =>
-    true
+    entityHelpers.hasProperty(entity, entityPropertiesEnum.YOU)
   )
-  
   let direction
   if (Keyboard.isPressed(controlsKeys.up)) {
     direction = directionsEnum.UP

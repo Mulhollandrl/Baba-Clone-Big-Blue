@@ -33,19 +33,30 @@ export default class Grid {
       case directionsEnum.LEFT: return {x: -1, y: 0}
       case directionsEnum.DOWN: return {x: 0, y: 1}
       case directionsEnum.UP: return {x: 0, y: -1}
-      default: throw new DeveloperError(`_getVectorFromDirection: invalid direction: ${direction}`)
+      default: throw new Error(`_getVectorFromDirection: invalid direction: ${direction}`)
     }
+  }
+  
+  _invalidPositionError (x, y) {
+    return `(${x}, ${y}) is not a valid position on the (${this.width} x ${this.height}) grid`
   }
   
   addEntity (entity) {
     const {x, y} = this._getPositionFromEntity(entity)
     const index = this._getIndex(x,y)
-    console.log(this.grid, index)
+    if (!this.isValidCoordinate(x, y)) {
+      console.error(entity)
+      throw new Error(`Grid.mjs::addEntity: ${this._invalidPositionError(x, y)}`)
+    }
     this.grid[index].set(entity.id, entity)
   }
   
   removeEntity (entity) {
     const {x, y} = this._getPositionFromEntity(entity)
+    if (!this.isValidCoordinate(x, y)) {
+      console.error(entity)
+      throw new Error(`Grid.mjs::removeEntity: ${this._invalidPositionError(x, y)}`)
+    }
     this.grid[this._getIndex(x, y)].delete(entity.id)
   }
   
@@ -55,6 +66,10 @@ export default class Grid {
     const vector = this._getVectorFromDirection(direction)
     position.x += vector.x
     position.y += vector.y
+    if (!this.isValidCoordinate(position.x, position.y)) {
+      console.error(entity)
+      throw new Error(`Grid.mjs::moveEntity: ${this._invalidPositionError(position.x, position.y)}`)
+    }
     this.addEntity(entity)
   }
     

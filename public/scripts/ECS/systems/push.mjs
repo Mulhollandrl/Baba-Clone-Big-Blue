@@ -32,9 +32,10 @@ function recursivePush (grid, position, direction, magnitude) { // returns boole
   const pushable = []
   for (let i = 0; i < adjacentEntities.length; i++) {
     const entity = adjacentEntities[i]
-    if (entityHelpers.hasAllProperties(entity, entityPropertiesEnum.PUSH)) {
+    if (entityHelpers.hasProperty(entity, entityPropertiesEnum.PUSH) || entityHelpers.hasAllComponents(entity, componentTypesEnum.TEXT)) {
       pushable.push(entity) // push and stop is still push
-    } else if (entityHelpers.hasAllProperties(entity, entityPropertiesEnum.STOP)) {
+    } else if (entityHelpers.hasProperty(entity, entityPropertiesEnum.STOP)) {
+      pushable.push(entity) // push and stop is still push
       return false
     }
   }
