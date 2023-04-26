@@ -44,7 +44,7 @@ function handlePlayer(entityManager) {
 }
 
 function handleUndo(entityManager) {
-  if (Keyboard.isPressed(controlsKeys.undo)) {
+  if (Keyboard.isPressed(controlsKeys.data.undo)) {
     entityManager.restore()
     Keyboard.unpress()
     return true
