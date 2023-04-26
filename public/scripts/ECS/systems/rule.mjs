@@ -1,35 +1,7 @@
 import { adjectiveTypesEnum, componentTypesEnum, directionsEnum, entityPropertiesEnum, nounTypesEnum, spriteSheetEnum, textTypesEnum } from "../../state/enums.mjs";
 import { Property } from "../components/Property.mjs";
 import * as entityHelpers from "../entityHelpers.mjs"
-
-function cartesianProduct(setA, setB) {
-    const product = new Set();
-    
-    setA.forEach(a => {
-        setB.forEach(b => {
-            product.add([a, b]);
-        });
-    });
-
-    return product;
-}
-
-function filterSet(set, condition) {
-    const filtered = new Set()
-    set.forEach(element => {
-        if (condition(element)) {
-            filtered.add(element)
-        }
-    })
-    return filtered
-}
-
-function mergeSets(original, other) {
-    other.forEach(element => {
-        original.add(element)
-    })
-    return original
-}
+import { mergeSets, cartesianProduct, filterSet } from "../../utilities/setutils.mjs";
 
 const onlyText = entity => entityHelpers.hasAllComponents(entity, componentTypesEnum.TEXT)
 export function handleRules(entityManager, grid) {
@@ -81,9 +53,6 @@ function ruleEffects(entityManager, rules) {
             return nounType && nounType !== nounTypesEnum.TEXT
         }
     ).forEach(entity => {
-        if (entity.getComponent(componentTypesEnum.SPRITE).spriteSheet === 'assets/objects/hedgeObjectSprites.png') {
-            console.log('destroying hedge properties...')
-        }
         entity.addComponent(Property())
     }) // Clear properties of all nouns
         
@@ -99,7 +68,6 @@ function ruleEffects(entityManager, rules) {
             entity.getComponent(componentTypesEnum.NOUN)?.nounType === subject.wordType
         )
         
-        console.log(toChange.length)
         for (let j = 0; j < toChange.length; j++) {
             // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
             toChange[j].getComponent(componentTypesEnum.NOUN).nounType = predicate.wordType;
