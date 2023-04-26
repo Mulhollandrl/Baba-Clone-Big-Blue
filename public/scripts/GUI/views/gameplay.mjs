@@ -6,19 +6,51 @@ import EntityManager from "../../ECS/EntityManager.mjs";
 import { levelMaker } from "../../ECS/levelMaker.mjs";
 
 export function gamePage (windowWidth, windowHeight, context, resetGame){
+    let audio = new Audio();
     let entityManager = null;
     let levelMade = false;
     let gameOverText = `GAME OVER! Press ${controlsKeys.undo} to undo!`;
     let winText = `YOU WIN!! Press ${controlsKeys.leave} to go to levels!`;
+    const randomSong = Math.floor(Math.random() * 7);
+
+    audio.loop = true;
+
+    switch (randomSong) {
+        case 0:
+            audio.src = "../../../assets/music/02 - Symphony For A Spider Plant.mp3"
+            break;
+        case 1:
+            audio.src = "../../../assets/music/04 - Ode To An African Violet.mp3"
+            break;
+        case 2:
+            audio.src = "../../../assets/music/05 - Concerto For Philodendron And Pothos.mp3"
+            break;
+        case 3:
+            audio.src = "../../../assets/music/06 - Rhapsody In Green.mp3"
+            break;
+        case 4:
+            audio.src = "../../../assets/music/07 - Swingin' Spathiphyllums.mp3"
+            break;
+        case 5:
+            audio.src = "../../../assets/music/08 - You Don't Have To Walk A Begonia.mp3"
+            break;
+        case 6:
+            audio.src = "../../../assets/music/09 - Mellow Mood For Maidenhair.mp3"
+            break;
+        }
 
     function processInput(keys) {
+        audio.play();
+
         if (keys.hasOwnProperty(controlsKeys.reset)) {
+            audio.currentTime = 0;
             resetGame();
 
             delete keys[controlsKeys.reset]
         }
 
         if (keys.hasOwnProperty(controlsKeys.leave)) {
+            audio.pause();
             delete keys[controlsKeys.leave]
 
             return modesEnum.LEVELS;

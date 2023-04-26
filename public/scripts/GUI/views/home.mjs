@@ -4,12 +4,25 @@ import { modesEnum } from "../../state/enums.mjs";
 import { controlsKeys } from "../../state/globals.mjs";
 
 export function homePage (windowWidth, windowHeight, context){
+    let audio = new Audio("../../../assets/music/01 - Plantasia.mp3")
     let creditsButton = button({y: 325, height: 50, text: "Credits!"}, windowWidth, context);
     let controlsButton = button({y: 225, height: 50, text: "Controls!"}, windowWidth, context);
     let newGameButton = button({y: 125, height: 50, text: "New Game!"}, windowWidth, context);
     let selectedButton = 0;
+    let musicLoaded = false;
+
+    audio.loop = true;
 
     function processInput(keys) {
+        if (musicLoaded) {
+            audio.play();
+        } else {
+            if (Object.keys(keys)[0] !== undefined) {
+                audio.play();
+                musicLoaded = true;
+            }
+        }
+
         if (keys.hasOwnProperty(controlsKeys.down)) {
             selectedButton++;
 
@@ -35,6 +48,7 @@ export function homePage (windowWidth, windowHeight, context){
 
             switch (selectedButton) {
                 case 0:
+                    audio.pause();
                     return modesEnum.LEVELS;
                 case 1:
                     return modesEnum.CONTROLS;
