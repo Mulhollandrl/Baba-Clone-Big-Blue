@@ -6,8 +6,9 @@ export function checkForAll(entityManager) {
         entityHelpers.hasAllComponents(entity, componentTypesEnum.NOUN)
     );
 
-    checkForSink(nouns);
-    return [checkForDefeat(entityManager, nouns), checkForWin(nouns)]
+    checkForSink(entityManager, nouns);
+    const checks = [checkForDefeat(entityManager, nouns), checkForWin(entityManager, nouns)]
+    return checks
 }
 
 function checkForDefeat(entityManager, nouns) {
@@ -41,7 +42,7 @@ function checkForDefeat(entityManager, nouns) {
     return false;
 }
 
-function checkForSink(nouns) {
+function checkForSink(entityManager, nouns) {
     const listToCheck = []
 
     nouns.forEach(element => {
@@ -51,14 +52,15 @@ function checkForSink(nouns) {
     });
 
     listToCheck.forEach(element => {
-        if (element.getComponent(componentTypesEnum.PROPERTY).isDefeat === true) {
+        if (element.getComponent(componentTypesEnum.PROPERTY).isSink === true) {
             listToCheck.forEach(entity => {
-                if (entity != element && entity.getComponent(componentTypesEnum.PROPERTY).isYou == false) {
+                if (entity != element) {
                     const entityPosition = entity.getComponent(componentTypesEnum.POSITION);
                     const elementPosition = element.getComponent(componentTypesEnum.POSITION);
 
                     if (entityPosition.x == elementPosition.x && entityPosition.y == elementPosition.y) {
                         entityManager.removeEntity(entity);
+                        entityManager.removeEntity(element);
                     }
                 }
             });
@@ -66,8 +68,9 @@ function checkForSink(nouns) {
     });
 }
 
-function checkForWin(nouns) {
+function checkForWin(entityManager, nouns) {
     const listToCheck = []
+    let isWin = false;
 
     nouns.forEach(element => {
         if (element.getComponent(componentTypesEnum.NOUN).nounType !== nounTypesEnum.TEXT) {
@@ -83,12 +86,12 @@ function checkForWin(nouns) {
                     const elementPosition = element.getComponent(componentTypesEnum.POSITION);
 
                     if (entityPosition.x == elementPosition.x && entityPosition.y == elementPosition.y) {
-                        return true;
+                        isWin = true;
                     }
                 }
             });
         }
     });
 
-    return false;
+    return isWin;
 }

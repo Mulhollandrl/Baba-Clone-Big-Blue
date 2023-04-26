@@ -22,6 +22,8 @@ export function creditsPage (windowWidth, windowHeight, context){
         let title = "Credits";
         let created = "Created By:\nEthan Christensen AND\nRichard Mulholland";
         let helper = "With Assistance From:\nDr. Dean Mathias";
+        let music = "With Music From:\nPlantasia by Mort Garson";
+        let art = "With Art From:\nBaba is You by Hempuli";
 
         context.font = "48px Courier";
 
@@ -35,6 +37,8 @@ export function creditsPage (windowWidth, windowHeight, context){
 
         context.fillText(created, (windowWidth/2) - (context.measureText(created).width/2), 125 + (fontHeight/2));
         context.fillText(helper, (windowWidth/2) - (context.measureText(helper).width/2), 200 + (fontHeight/2));
+        context.fillText(music, (windowWidth/2) - (context.measureText(music).width/2), 275 + (fontHeight/2));
+        context.fillText(art, (windowWidth/2) - (context.measureText(art).width/2), 350 + (fontHeight/2));
 
         backButton.render();
         backButton.hover();
