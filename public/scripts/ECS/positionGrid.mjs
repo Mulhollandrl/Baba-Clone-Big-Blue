@@ -15,8 +15,8 @@ export function positionGrid(levelWidth, levelHeight) {
     return {
         get tileSize() { return tileSize },
         get leftStart() { return leftStart },
-        get positionGridWidth() { return tileSize * levelWidth },
-        get positionGridHeight() { return tileSize * levelHeight },
+        levelWidth : tileSize * levelWidth,
+        levelHeight : tileSize * levelHeight,
         getX : getX,
         getY : getY
     }

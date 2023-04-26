@@ -2,6 +2,15 @@ import { adjectiveTypesEnum, componentTypesEnum, directionsEnum, entityPropertie
 import { Property } from "../components/Property.mjs";
 import * as entityHelpers from "../entityHelpers.mjs"
 
+const winUnlock = new Audio("../../../assets/sounds/unlockWin.mp3")
+let soundPlayed = false;
+
+winUnlock.onended = function() {
+    winUnlock.pause();
+    winUnlock.currentTime = 0;
+    soundPlayed = true;
+}
+
 function cartesianProduct(setA, setB) {
     const product = new Set();
     
@@ -97,25 +106,25 @@ function ruleEffects(entityManager, rules) {
         }
         const toChange = entityManager.queryEntities(entity =>
             entity.getComponent(componentTypesEnum.NOUN)?.nounType === subject.wordType
-        )
-        
-        console.log(toChange.length)
-        for (let j = 0; j < toChange.length; j++) {
-            // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
-            toChange[j].getComponent(componentTypesEnum.NOUN).nounType = predicate.wordType;
-            toChange[j].getComponent(componentTypesEnum.SPRITE).spriteSheet = spriteSheetEnum[predicate.wordType]
+            )
+            
+            console.log(toChange.length)
+            for (let j = 0; j < toChange.length; j++) {
+                // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
+                toChange[j].getComponent(componentTypesEnum.NOUN).nounType = predicate.wordType;
+                toChange[j].getComponent(componentTypesEnum.SPRITE).spriteSheet = spriteSheetEnum[predicate.wordType]
+            }
         }
-    }
-    
-    for (let i = 0; i < adjectiveRules.length; i++) {
-        const [subject, predicate] = adjectiveRules[i]
-        const toChange = entityManager.queryEntities(entity =>
-            entity.getComponent(componentTypesEnum.NOUN)?.nounType === subject.wordType
-        )
         
-        for (let j = 0; j < toChange.length; j++) {
-            // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
-            const properties = toChange[j].getComponent(componentTypesEnum.PROPERTY)
+        for (let i = 0; i < adjectiveRules.length; i++) {
+            const [subject, predicate] = adjectiveRules[i]
+            const toChange = entityManager.queryEntities(entity =>
+                entity.getComponent(componentTypesEnum.NOUN)?.nounType === subject.wordType
+                )
+        
+                for (let j = 0; j < toChange.length; j++) {
+                    // let properties = toChange[j].getComponent(componentTypesEnum.PROPERTY);
+                    const properties = toChange[j].getComponent(componentTypesEnum.PROPERTY)
             
             switch (predicate.wordType) {
                 case adjectiveTypesEnum.DEFEAT:
@@ -130,13 +139,24 @@ function ruleEffects(entityManager, rules) {
                 case adjectiveTypesEnum.STOP:
                     properties.isStop = true;
                     break;
-                case adjectiveTypesEnum.WIN:
+                    case adjectiveTypesEnum.WIN:
+                        winUnlock.play();
                     properties.isWin = true;
                     break;
-                case adjectiveTypesEnum.YOU:
-                    properties.isYou = true;
-                    break;
-            }
+                    case adjectiveTypesEnum.YOU:
+                        properties.isYou = true;
+                        break;
+                    }
         }
+    }
+
+    const wins = entityManager.queryEntities(
+        entity => entityHelpers.hasProperty(entity, entityPropertiesEnum.WIN)
+    )
+    
+    if (wins.length > 0 && !soundPlayed) {
+        debugger
+        soundPlayed = true;
+        winUnlock.play();
     }
 }

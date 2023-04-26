@@ -7,9 +7,16 @@ import * as entityHelpers from "../entityHelpers.mjs"
  * @param {Grid} grid 
  */
 export function handleMovement (entityManager, grid) {
+  const moveSound = new Audio("../../../assets/sounds/move.mp3")
   const movings = entityManager.queryEntities(entity =>
     entityHelpers.hasAllComponents(entity, componentTypesEnum.MOVED)
   )
+
+  moveSound.volume = .35;
+
+  if (movings.length > 0) {
+    moveSound.play();
+  }
   
   for (let i = 0; i < movings.length; i++) {
     const moving = movings[i]

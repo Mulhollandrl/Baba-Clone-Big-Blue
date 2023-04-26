@@ -11,7 +11,9 @@ export function gamePage (windowWidth, windowHeight, context, resetGame){
     let levelMade = false;
     let gameOverText = `GAME OVER! Press ${controlsKeys.undo} to undo!`;
     let winText = `YOU WIN!! Press ${controlsKeys.leave} to go to levels!`;
+    let winSoundPlayed = false;
     const randomSong = Math.floor(Math.random() * 7);
+    const winSound = new Audio("../../../assets/sounds/win.mp3")
 
     audio.loop = true;
 
@@ -83,6 +85,11 @@ export function gamePage (windowWidth, windowHeight, context, resetGame){
         }
 
         if (entityManager.win) {
+            if (!winSoundPlayed) {
+                winSound.play();
+                winSoundPlayed = true;
+            }
+
             context.fillStyle = "white"
             context.font = "48px Courier";
 
