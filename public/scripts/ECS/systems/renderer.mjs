@@ -12,8 +12,6 @@ export function handleRendering(entityManager, grid, changeSprite) {
         entityHelpers.hasAllComponents(entity, [componentTypesEnum.SPRITE, componentTypesEnum.POSITION])
     );
 
-    console.log(`x: ${getX(0)}, y: ${getY(0)}, width: ${levelWidth}, height: ${levelHeight}`)
-
     context.fillStyle = "#415080"
     context.fillRect(getX(0), getY(0), levelWidth, levelHeight)
 
