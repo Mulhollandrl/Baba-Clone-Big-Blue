@@ -3,7 +3,7 @@ import * as entityHelpers from "../entityHelpers.mjs"
 
 export function checkForAll(entityManager) {
     const nouns = entityManager.queryEntities(entity =>
-        entityHelpers.hasAnyComponent(entity, componentTypesEnum.NOUN)
+        entityHelpers.hasAllComponents(entity, componentTypesEnum.NOUN)
     );
 
     checkForSink(nouns);
