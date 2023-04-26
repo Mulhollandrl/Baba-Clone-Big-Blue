@@ -1,4 +1,4 @@
-import { componentTypesEnum, directionsEnum, entityPropertiesEnum, nounTypesEnum, spriteSheetEnum, textTypesEnum } from "../../state/enums.mjs";
+import { adjectiveTypesEnum, componentTypesEnum, directionsEnum, entityPropertiesEnum, nounTypesEnum, spriteSheetEnum, textTypesEnum } from "../../state/enums.mjs";
 import { Property } from "../components/Property.mjs";
 import * as entityHelpers from "../entityHelpers.mjs"
 
@@ -118,22 +118,22 @@ function ruleEffects(entityManager, rules) {
             const properties = toChange[j].getComponent(componentTypesEnum.PROPERTY)
             
             switch (predicate.wordType) {
-                case 'kill':
+                case adjectiveTypesEnum.DEFEAT:
                     properties.isDefeat = true;
                     break;
-                case 'push':
+                case adjectiveTypesEnum.PUSH:
                     properties.isPush = true;
                     break;
-                case 'sink':
+                case adjectiveTypesEnum.SINK:
                     properties.isSink = true;
                     break;
-                case 'stop':
+                case adjectiveTypesEnum.STOP:
                     properties.isStop = true;
                     break;
-                case 'win':
+                case adjectiveTypesEnum.WIN:
                     properties.isWin = true;
                     break;
-                case 'you':
+                case adjectiveTypesEnum.YOU:
                     properties.isYou = true;
                     break;
             }
