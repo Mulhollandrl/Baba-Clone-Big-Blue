@@ -7,6 +7,7 @@ import { handleMovement } from "./systems/movement.mjs"
 import { handleRendering } from "./systems/renderer.mjs"
 import { currentLevel, levels } from "../state/globals.mjs"
 import { handleRules } from "./systems/rule.mjs"
+import { checkForAll } from "./systems/objectEffects.mjs"
 entityHelpers
 
 export default class EntityManager {
@@ -16,6 +17,8 @@ export default class EntityManager {
     this.elapsedTime = performance.now();
     // How often do we change the sprite?
     this.animationSpeed = 250;
+    this.stillAlive = true;
+    this.win = false;
   }
   
   addEntity (entity) {
@@ -23,6 +26,11 @@ export default class EntityManager {
     if (entityHelpers.hasAllComponents(entity, componentTypesEnum.POSITION)) {
       this.grid.addEntity(entity)
     }
+  }
+
+  removeEntity (entity) {
+    this.entities.delete(entity);
+    this.grid.removeEntity(entity);
   }
   
   /**
@@ -60,6 +68,11 @@ export default class EntityManager {
     handlePushing(this, this.grid)
     handleMovement(this, this.grid)
     handleRules(this, this.grid, levels[currentLevel].width, levels[currentLevel].height)
+    
+    let checks = checkForAll(this);
+
+    this.stillAlive = !(checks[0]);
+    this.win = checks[1];
   }
   
   render() {
